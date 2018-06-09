@@ -1,0 +1,41 @@
+Teamarbeit Mini-Protokol
+
+19.04.  Auftakttreffen Teamarbeit
+
+23.04.  Klaerung des Arbeitsauftrags / Teamfindung
+- C++ Gui, die eine ROS-Nachricht schickt
+- Taster zum erkennen von Gewicht
+- Korb auf den Turtlebot stellen zum Transport
+- Optional: RFID-Leser mit Tags (z.B. in Tassen)
+- Auftrag: Ubuntu 16.04 installieren und ROS-Tutorials durcharbeiten
+
+30.04.  Konkretisierung der Auftraege und Probleme / Arbeitsteilung
+- Zugang zu Repositories
+- Ausmessen der Flaeche des Turtlebots (20 x 12 cm)
+- Erstellen einer Readme-Datei mit Details zur Kommunikation mit dem Roboter
+- Priorisierung / Auswahl der Arbeitsauftraege
+- Aufteilung der Auftraege nach persoenlichen Praeferenzen
+- GUI soll mit QT oder Chromium gemacht werden
+
+07.05. Besprechung der UI und Hardware
+- Entscheidung fuer QT als UI
+- Weitere Besprechung der Hardware
+
+14.05. Besprechung des Auftrages mit Betreuer
+- Konkretisierung der Verbindung von Computer zu Roboter
+- Antwort auf die Frage: Wo muss was hinzugefuegt werden?
+- Aufteilung der Arbeit (zuerst Recherche)
+
+21.05. Pfingstmontag (Frei)
+
+28.05. Roboter fahren lassen
+- Starten des Laptops fuer einen Turtlebot
+- rviz-Darstellung von:
+  - Weltbild des Roboters (2D-Map)
+  - Lokale und Globale Costmap fuer die Wegberechnung
+  - Fahren des Roboters durch klicken auf die Karte
+- Konkretisierung der UI
+
+04.06. Festhalten eines Protokols und Fehlersuche
+- Installieren von rqt auf einem Laptop
+- Arbeit am Build der Roboter-Dateien (nicht erfolgreich)
