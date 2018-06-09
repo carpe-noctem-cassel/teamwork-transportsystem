@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(rqt_turtlebutler)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -20,7 +20,7 @@ set(rqt_turtlebutler_SRCS
 )
 
 set(rqt_turtlebutler_HDRS
-  src/rqc_turtlebutler/TurtleButler.h
+  include/rqc_turtlebutler/TurtleButler.h
 )
 
 set(rqt_turtlebutler_UIS
@@ -123,7 +123,7 @@ set(rqt_turtlebutler_INCLUDE_DIRECTORIES
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS ${rqt_turtlebutelr_INCLUDE_DIRECTORIES}
+  INCLUDE_DIRS ${rqt_turtlebutler_INCLUDE_DIRECTORIES}
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS rqt_gui rqt_gui_cpp
 #  DEPENDS system_lib
@@ -139,7 +139,7 @@ add_library(${PROJECT_NAME} ${rtq_turtlebutler_SRCS} ${rtq_turtlebutler_MOCS} ${
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
 find_package(class_loader)
-class_loader_hide_library_symbold(${PROJECT_NAME})
+class_loader_hide_library_symbols(${PROJECT_NAME})
 
 install(FILES plugin.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -148,8 +148,12 @@ install(FILES plugin.xml
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 )
 
+install(PROGRAMS scripts/rqt_turtlebutler
+  DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+)
 install(PROGRAMS scripts/rqt_turtlebutler
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
@@ -182,7 +186,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/rqt_mypkg_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/rqt_turtlebutler/TurtleButler.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

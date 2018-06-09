@@ -1,5 +1,5 @@
 <library path="src">
-  <class name="TurtleButler" type="rqt_turtlebutler.butler_module.TurtleButler" base_class_type="rqt_gui_cpp::Plugin">
+  <class name="TurtleButler" type="rqt_turtlebutler::TurtleButler" base_class_type="rqt_gui_cpp::Plugin">
     <description>
       A C++ GUI plugin for the TurtleButler.
     </description>

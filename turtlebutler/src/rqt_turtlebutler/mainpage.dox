@@ -1,0 +1,6 @@
+\**
+\mainpage
+\htmlinclude manifest.html
+
+\b rqt_turtlebutler provides a GUI plugin for sending a TurtleBot on errands
+*/

@@ -1,0 +1,8 @@
+prefix=/home/eric/~catkin_ws/devel
+
+Name: rqt_turtlebutler
+Description: Description of rqt_turtlebutler
+Version: 0.0.1
+Cflags: -I/home/eric/~catkin_ws/src/rqt_turtlebutler/include -I/home/eric/~catkin_ws/build/rqt_turtlebutler
+Libs: -L/home/eric/~catkin_ws/devel/lib -lrqt_turtlebutler
+Requires: rqt_gui rqt_gui_cpp
