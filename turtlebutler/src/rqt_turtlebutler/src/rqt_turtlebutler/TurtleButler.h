@@ -1,15 +1,12 @@
-#ifndef butler__TurtleButler_H
-#define butler__TurtleButler_H
 
 #include <rqt_gui_cpp/plugin.h>
 #include <ui_TurtleButler.h>
 #include <QWidget>
 
 namespace rqt_turtlebutler {
-  class TurtleButler
-    : public rqt_gui_cpp::Plugin
-  {
+  class TurtleButler : public rqt_gui_cpp::Plugin {
     Q_OBJECT
+
   public:
     TurtleButler();
     virtual void initPlugin(qt_gui_cpp::PluginContext& context);
@@ -24,4 +21,3 @@ namespace rqt_turtlebutler {
     QWidget* widget_;
   };
 }
-#endif
