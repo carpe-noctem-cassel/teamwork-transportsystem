@@ -16,7 +16,7 @@ const int led_pin = 13;
 
 bool last_reading;
 long last_debounce_time=0;
-long debounce_delay=50;
+long debounce_delay=25;
 bool published = true;
 
 void setup()
