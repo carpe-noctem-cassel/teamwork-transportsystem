@@ -67,14 +67,14 @@ set(rqt_turtlebutler_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(rqt_turtlebutler_SOURCE_PREFIX /home/eric/~catkin_ws/src/rqt_turtlebutler)
-  set(rqt_turtlebutler_DEVEL_PREFIX /home/eric/~catkin_ws/devel)
+  set(rqt_turtlebutler_SOURCE_PREFIX /home/lab-user/teamwork-transportsystem/turtlebutler/src/rqt_turtlebutler)
+  set(rqt_turtlebutler_DEVEL_PREFIX /home/lab-user/teamwork-transportsystem/turtlebutler/devel)
   set(rqt_turtlebutler_INSTALL_PREFIX "")
   set(rqt_turtlebutler_PREFIX ${rqt_turtlebutler_DEVEL_PREFIX})
 else()
   set(rqt_turtlebutler_SOURCE_PREFIX "")
   set(rqt_turtlebutler_DEVEL_PREFIX "")
-  set(rqt_turtlebutler_INSTALL_PREFIX /home/eric/~catkin_ws/install)
+  set(rqt_turtlebutler_INSTALL_PREFIX /home/lab-user/teamwork-transportsystem/turtlebutler/install)
   set(rqt_turtlebutler_PREFIX ${rqt_turtlebutler_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(rqt_turtlebutler_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/eric/~catkin_ws/src/rqt_turtlebutler/include;/home/eric/~catkin_ws/build/rqt_turtlebutler " STREQUAL " ")
+if(NOT "/home/lab-user/teamwork-transportsystem/turtlebutler/src/rqt_turtlebutler/include;/usr/include/x86_64-linux-gnu/qt5/;/usr/include/x86_64-linux-gnu/qt5/QtWidgets;/usr/include/x86_64-linux-gnu/qt5/QtGui;/usr/include/x86_64-linux-gnu/qt5/QtCore;/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++-64;/usr/include;/usr/include/x86_64-linux-gnu/qt5/QtOpenGL;/home/lab-user/teamwork-transportsystem/turtlebutler/devel/include " STREQUAL " ")
   set(rqt_turtlebutler_INCLUDE_DIRS "")
-  set(_include_dirs "/home/eric/~catkin_ws/src/rqt_turtlebutler/include;/home/eric/~catkin_ws/build/rqt_turtlebutler")
+  set(_include_dirs "/home/lab-user/teamwork-transportsystem/turtlebutler/src/rqt_turtlebutler/include;/usr/include/x86_64-linux-gnu/qt5/;/usr/include/x86_64-linux-gnu/qt5/QtWidgets;/usr/include/x86_64-linux-gnu/qt5/QtGui;/usr/include/x86_64-linux-gnu/qt5/QtCore;/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++-64;/usr/include;/usr/include/x86_64-linux-gnu/qt5/QtOpenGL;/home/lab-user/teamwork-transportsystem/turtlebutler/devel/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/eric/~catkin_ws/src/rqt_turtlebutler/include;/home/eric/~catkin_ws
         message(FATAL_ERROR "Project 'rqt_turtlebutler' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'rqt_turtlebutler' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/eric/~catkin_ws/src/rqt_turtlebutler/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'rqt_turtlebutler' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/lab-user/teamwork-transportsystem/turtlebutler/src/rqt_turtlebutler/${idir}'.  ${_report}")
     endif()
     _list_append_unique(rqt_turtlebutler_INCLUDE_DIRS ${include})
   endforeach()
@@ -129,7 +129,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/eric/~catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/lab-user/teamwork-transportsystem/turtlebutler/devel/lib;/home/lab-user/ttbws/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

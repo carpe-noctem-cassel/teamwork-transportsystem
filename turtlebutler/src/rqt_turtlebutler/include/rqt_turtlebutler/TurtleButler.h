@@ -2,7 +2,7 @@
 #define butler__TurtleButler_H
 
 #include <rqt_gui_cpp/plugin.h>
-#include <butler/ui_TurtleButler.h>
+#include <ui_TurtleButler.h>
 #include <QWidget>
 
 namespace rqt_turtlebutler {
@@ -14,14 +14,14 @@ namespace rqt_turtlebutler {
     TurtleButler();
     virtual void initPlugin(qt_gui_cpp::PluginContext& context);
     virtual void shutdownPlugin();
-    virtual void saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::& instance_settings) const;
+    virtual void saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::Settings& instance_settings) const;
     virtual void restoreSettings(const qt_gui_cpp::Settings& plugin_settings, const qt_gui_cpp::Settings& instance_settings);
 
     //bool hasConfiguration() const;
     //void triggerConfiguration();
   private:
     Ui::TurtleButlerWidget ui_;
-    QWidget* widget_;
+    QMainWindow* widget_;
   };
 }
 #endif
