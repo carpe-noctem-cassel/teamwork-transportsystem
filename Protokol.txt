@@ -39,3 +39,12 @@ Teamarbeit Mini-Protokol
 04.06. Festhalten eines Protokols und Fehlersuche
 - Installieren von rqt auf einem Laptop
 - Arbeit am Build der Roboter-Dateien (nicht erfolgreich)
+
+11.06.
+
+18.06.
+
+25.06. Leichte Verzweiflung
+- Installieren von rosserial auf dem Turtlebot-Laptop
+- Testen des Tasters auf dem Turtlebot-Laptop
+- Beheben von Fehlern in der UI
