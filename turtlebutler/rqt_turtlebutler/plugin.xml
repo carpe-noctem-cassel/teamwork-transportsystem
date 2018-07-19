@@ -1,0 +1,11 @@
+<library path="lib/librqt_turtlebutler">
+  <class name="rqt_turtlebutler/TurtleButler" type="rqt_turtlebutler::TurtleButler" base_class_type="rqt_gui_cpp::Plugin">
+    <description>
+      A C++ GUI plugin for the TurtleButler.
+    </description>
+    <qtgui>
+      <label>Turtle Butler</label>
+      <icon type="theme">folder</icon>
+    </qtgui>
+  </class>
+</library>

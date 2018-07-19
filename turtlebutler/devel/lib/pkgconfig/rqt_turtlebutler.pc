@@ -1,8 +1,0 @@
-prefix=/home/lab-user/teamwork-transportsystem/turtlebutler/devel
-
-Name: rqt_turtlebutler
-Description: Description of rqt_turtlebutler
-Version: 0.0.1
-Cflags: -I/home/lab-user/teamwork-transportsystem/turtlebutler/src/rqt_turtlebutler/include -I/usr/include/x86_64-linux-gnu/qt5/ -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++-64 -I/usr/include -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/home/lab-user/teamwork-transportsystem/turtlebutler/devel/include
-Libs: -L/home/lab-user/teamwork-transportsystem/turtlebutler/devel/lib -lrqt_turtlebutler
-Requires: rqt_gui rqt_gui_cpp
