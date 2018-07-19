@@ -48,3 +48,7 @@ Teamarbeit Mini-Protokol
 - Installieren von rosserial auf dem Turtlebot-Laptop
 - Testen des Tasters auf dem Turtlebot-Laptop
 - Beheben von Fehlern in der UI
+
+19.07. Verbesserung der GUI
+- Testen von Buttons und ComboBoxen
+- Hinzufuegen von File-Lesen und Publisher (noch ohne msg-Format)
