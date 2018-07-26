@@ -5,6 +5,7 @@
 #include <ui_TurtleButler.h>
 #include <QWidget>
 #include "ros/ros.h"
+#include <vector>
 
 namespace rqt_turtlebutler {
   class TurtleButler
@@ -29,6 +30,7 @@ namespace rqt_turtlebutler {
     QMainWindow* widget_;
     ros::NodeHandle n;
     ros::Publisher turtleButler_pub;
+    std::vector<std::string> splitString(std::string input, std::string delimiter);
 
   };
 }
