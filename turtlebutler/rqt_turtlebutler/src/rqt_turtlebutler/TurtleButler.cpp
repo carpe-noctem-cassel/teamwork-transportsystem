@@ -9,7 +9,9 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include <vector>
-
+#include <string>
+#include <ros/console.h>
+#include <tf/transform_listener.h>
 
 namespace rqt_turtlebutler {
   TurtleButler::TurtleButler()
@@ -19,11 +21,15 @@ namespace rqt_turtlebutler {
     setObjectName("TurtleButler");
   }
   
+  void checkTurtlebotMessage(const std_msgs::String::ConstPtr& msg)
+  {
+    ROS_INFO("I heard: [%s]", msg->data.c_str());
+  }
+
   void TurtleButler::initPlugin(qt_gui_cpp::PluginContext& context)
   {
     //ros::init(context.argv().length, context.argv(), "rqt_turtlebutler");
-
-    turtleButler_pub = n.advertise<std_msgs::String>("turtlebutler", 1000);
+    ROS_INFO("started");
     QStringList argv = context.argv();
     widget_ = new QMainWindow();
     ui_.setupUi(widget_);
@@ -32,6 +38,7 @@ namespace rqt_turtlebutler {
     initComboBoxes();
     
     connect(ui_.sendButton, SIGNAL (released()), this, SLOT (sendData()));
+
   }
 
   void TurtleButler::initComboBoxes()
@@ -53,7 +60,7 @@ namespace rqt_turtlebutler {
         if(readPositions)
         {
           std::vector<std::string> data = splitString(value, ";");
-          std::string position = data.at(1).append(data.at(2));
+          std::string position = data.at(1).append(" ").append(data.at(2));
           ui_.pickup_comboBox->addItem(data.at(0).c_str(), position.c_str());
           ui_.dropoff_comboBox->addItem(data.at(0).c_str(), position.c_str());
         }
@@ -61,6 +68,8 @@ namespace rqt_turtlebutler {
         {
           std::vector<std::string> data = splitString(value, ";");
           ui_.turtlebot_comboBox->addItem(data.at(0).c_str(), data.at(1).c_str());
+          ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>(data.at(1).c_str(), 1000);
+          turtleButler_publishers[data.at(1).c_str()] = pub;
         }
       }
     }
@@ -87,13 +96,35 @@ namespace rqt_turtlebutler {
 
   void TurtleButler::sendData()
   {
-    std_msgs::String msg;
-    std::string data = ui_.turtlebot_comboBox->currentData().toString().toStdString();
-    data.append(ui_.pickup_comboBox->currentData().toString().toStdString());
-    data.append(ui_.dropoff_comboBox->currentData().toString().toStdString());
-    msg.data = data;
-    // TODO: add data on locations and item
-    turtleButler_pub.publish(msg);
+    //std_msgs::String msg;
+    std::string butler_name = ui_.turtlebot_comboBox->currentData().toString().toStdString();
+    std::string pickupPoint = ui_.pickup_comboBox->currentData().toString().toStdString();
+    std::string dropoffPoint = ui_.dropoff_comboBox->currentData().toString().toStdString();
+
+
+   	geometry_msgs::PoseStamped pose;
+
+   	pose.header.frame_id = "/map";
+   	pose.header.stamp = ros::Time::now();
+    std::string::size_type offset;
+    ROS_INFO("%s", pickupPoint.c_str());
+    // ROS_INFO ("y: %d", std::stod (pickupPoint.substr(offset)));
+
+   	pose.pose.position.x = std::stod (pickupPoint, &offset);
+   	pose.pose.position.y = std::stod (pickupPoint.substr(offset));
+
+   	tf::Quaternion quat = tf::Quaternion(0,0,1,0);
+    
+   	tf::quaternionTFToMsg(quat, pose.pose.orientation);
+    //msg.data = "Test";
+    if (turtleButler_publishers.find(butler_name) != turtleButler_publishers.end())
+    {
+      turtleButler_publishers[butler_name].publish(pose);
+    }
+    else
+    {
+      ROS_ERROR("Could not find robot!");
+    }
 //    std::cout << ui_.turtlebot_comboBox->currentData().toString().toStdString();
   }
   

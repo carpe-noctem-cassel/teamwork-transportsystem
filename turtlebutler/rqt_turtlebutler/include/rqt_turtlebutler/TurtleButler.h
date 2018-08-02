@@ -6,6 +6,8 @@
 #include <QWidget>
 #include "ros/ros.h"
 #include <vector>
+#include <map>
+#include <geometry_msgs/PoseStamped.h>
 
 namespace rqt_turtlebutler {
   class TurtleButler
@@ -29,9 +31,9 @@ namespace rqt_turtlebutler {
     Ui::TurtleButlerWidget ui_;
     QMainWindow* widget_;
     ros::NodeHandle n;
-    ros::Publisher turtleButler_pub;
+    std::map<std::string, ros::Publisher> turtleButler_publishers;
     std::vector<std::string> splitString(std::string input, std::string delimiter);
-
+    geometry_msgs::PoseStamped getPositions(std::string input, std::string delimeter);
   };
 }
 #endif

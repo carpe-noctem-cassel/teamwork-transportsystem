@@ -1,6 +1,6 @@
-Rafael;rafael;
-Leonardo;leonardo;
-Donatello;donatello;
+Raphael;/raphael/move_base_simple/goal;
+Leonardo;/leonardo/move_base_simple/goal;
+Donatello;/donatello/move_base_simple/goal;
 -
-Labor;0;0;
+Labor;2,2843;5,433;
 WoAnders;999;999

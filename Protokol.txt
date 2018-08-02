@@ -52,3 +52,12 @@ Teamarbeit Mini-Protokol
 19.07. Verbesserung der GUI
 - Testen von Buttons und ComboBoxen
 - Hinzufuegen von File-Lesen und Publisher (noch ohne msg-Format)
+
+26.07. Weitere Verbesserung der GUI
+- Verbesserung der Configurations-File
+- Turtlebot laden (konnte desswegen nicht verwendet werden)
+
+02.08. Hinzufügen korrekter ROS-Nachrichten
+- Verwenden von Pose_Stamped zum verschicken einer Nachricht
+- Turtlebot-Akku scheint kaputt zu sein
+- Beim Teilen der Zahlen müssen diese mit einem "," getrennt werden anstatt mit einem "." (wieso?) 

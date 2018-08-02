@@ -28,6 +28,12 @@
         "functional": "cpp",
         "sstream": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "qwidget": "cpp",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp"
     }
 }
