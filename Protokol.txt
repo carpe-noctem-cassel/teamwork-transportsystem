@@ -60,4 +60,12 @@ Teamarbeit Mini-Protokol
 02.08. Hinzufügen korrekter ROS-Nachrichten
 - Verwenden von Pose_Stamped zum verschicken einer Nachricht
 - Turtlebot-Akku scheint kaputt zu sein
-- Beim Teilen der Zahlen müssen diese mit einem "," getrennt werden anstatt mit einem "." (wieso?) 
+- Beim Teilen der Zahlen müssen diese mit einem "," getrennt werden anstatt mit einem "." (wieso?)
+
+09.08. Arbeit mit dem Turtlebot
+- Problem beim Versenden der Nachrichten an den Turtlebot (Fix durch deaktivieren von Netzwerk 1)
+- Hinzufügen von Error handling bei schlecht formatierter Config-Datei
+- Senden von Movement-Nachrichten an den Turtlebot (funktioniert)
+- Positionen auf der Karte sind Absolut und nicht relativ zum Turtlebot
+- Veränderung des Arduino-Skriptes, sodass es jede Sekunde eine Nachricht schickt
+- Erstellen eines Prototyp-Korbes aus einer Haribo-Trommel

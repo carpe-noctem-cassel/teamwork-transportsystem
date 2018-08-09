@@ -52,24 +52,35 @@ namespace rqt_turtlebutler {
       bool readPositions = false;
       while(getline(botsFile, value))
       {
-        if(value.find("-") != std::string::npos)
+        if(value.find("#") != std::string::npos)
         {
           readPositions = true;
           continue;
         }
         if(readPositions)
         {
-          std::vector<std::string> data = splitString(value, ";");
-          std::string position = data.at(1).append(" ").append(data.at(2));
-          ui_.pickup_comboBox->addItem(data.at(0).c_str(), position.c_str());
-          ui_.dropoff_comboBox->addItem(data.at(0).c_str(), position.c_str());
+          try {
+            std::vector<std::string> data = splitString(value, ";");
+            std::string position = data.at(1).append(" ").append(data.at(2));
+            ui_.pickup_comboBox->addItem(data.at(0).c_str(), position.c_str());
+            ui_.dropoff_comboBox->addItem(data.at(0).c_str(), position.c_str());
+          } catch(std::out_of_range e)
+          {
+            ROS_ERROR("Config file error %s", e.what());
+          }
         }
         else
         {
-          std::vector<std::string> data = splitString(value, ";");
-          ui_.turtlebot_comboBox->addItem(data.at(0).c_str(), data.at(1).c_str());
-          ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>(data.at(1).c_str(), 1000);
-          turtleButler_publishers[data.at(1).c_str()] = pub;
+          try
+          {
+            std::vector<std::string> data = splitString(value, ";");
+            ui_.turtlebot_comboBox->addItem(data.at(0).c_str(), data.at(1).c_str());
+            ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>(data.at(1).c_str(), 1000);
+            turtleButler_publishers[data.at(1).c_str()] = pub;
+          } catch(std::out_of_range e)
+          {
+            ROS_ERROR("Config file error %s", e.what());
+          }
         }
       }
     }

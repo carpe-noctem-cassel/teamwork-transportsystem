@@ -9,15 +9,14 @@
 ros::NodeHandle nh;
 
 std_msgs::Bool pushed_msg;
-ros::Publisher pub_button("pushed", &pushed_msg);
+ros::Publisher pub_button("local_taster", &pushed_msg);
 
 const int button_pin = 7;
 const int led_pin = 13;
 
 bool last_reading;
 long last_debounce_time=0;
-long debounce_delay=25;
-bool published = true;
+long debounce_delay=1000;
 
 void setup()
 {
@@ -42,18 +41,13 @@ void loop()
   
   bool reading = ! digitalRead(button_pin);
   
-  if (last_reading!= reading){
-      last_debounce_time = millis();
-      published = false;
-  }
-  
   //if the button value has not changed during the debounce delay
   // we know it is stable
-  if ( !published && (millis() - last_debounce_time)  > debounce_delay) {
+  if ( (millis() - last_debounce_time)  >= debounce_delay) {
+    last_debounce_time += debounce_delay;
     digitalWrite(led_pin, reading);
     pushed_msg.data = reading;
     pub_button.publish(&pushed_msg);
-    published = true;
   }
 
   last_reading = reading;
