@@ -69,3 +69,11 @@ Teamarbeit Mini-Protokol
 - Positionen auf der Karte sind Absolut und nicht relativ zum Turtlebot
 - Veränderung des Arduino-Skriptes, sodass es jede Sekunde eine Nachricht schickt
 - Erstellen eines Prototyp-Korbes aus einer Haribo-Trommel
+
+16.08. Einbinden des Tasters
+- Einbinden des Tasters in das World Model
+- Besprechung einer Verbesserung der GUI Dateien
+- Planung fuer naechstes mal: Verwenden von ttb/wm/topology/TopologicalModel.cpp mit der Funktion readTopologyFromConfig
+- Verwenden der Datei: etc/TopologicalModel.config
+
+23.08. Verbessern der UI
