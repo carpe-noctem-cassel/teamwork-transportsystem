@@ -5,4 +5,3 @@ Donatello;/donatello/move_base_simple/goal;
 Labor;2,6;0,0;
 Labor Fenster;-0,52;0,02;
 Flur (Labor);8,25;6,26;
-Falsch;374,2

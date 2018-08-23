@@ -9,6 +9,11 @@
 #include <map>
 #include <geometry_msgs/PoseStamped.h>
 
+namespace supplementary
+{
+  class SystemConfig;
+}
+
 namespace rqt_turtlebutler {
   class TurtleButler
     : public rqt_gui_cpp::Plugin
@@ -24,16 +29,19 @@ namespace rqt_turtlebutler {
   private slots:
     void sendData();
     void initComboBoxes();
-
+    
     //bool hasConfiguration() const;
     //void triggerConfiguration();
   private:
+    void readConfig();
     Ui::TurtleButlerWidget ui_;
     QMainWindow* widget_;
     ros::NodeHandle n;
     std::map<std::string, ros::Publisher> turtleButler_publishers;
+    std::map<std::string, std::vector<std::string>> rooms;
     std::vector<std::string> splitString(std::string input, std::string delimiter);
     geometry_msgs::PoseStamped getPositions(std::string input, std::string delimeter);
+    supplementary::SystemConfig *sc;
   };
 }
 #endif

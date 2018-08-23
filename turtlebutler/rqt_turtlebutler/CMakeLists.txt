@@ -9,6 +9,7 @@ set (CMAKE_CXX_STANDARD 11)
 find_package(catkin REQUIRED COMPONENTS
   rqt_gui
   rqt_gui_cpp
+  system_config
 )
 
 #find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
@@ -53,7 +54,7 @@ endif()
 catkin_package(
   INCLUDE_DIRS ${rqt_turtlebutler_INCLUDE_DIRECTORIES}
   LIBRARIES ${PROJECT_NAME} 
-  CATKIN_DEPENDS rqt_gui rqt_gui_cpp
+  CATKIN_DEPENDS rqt_gui rqt_gui_cpp system_config
 #  DEPENDS system_lib
 )
 

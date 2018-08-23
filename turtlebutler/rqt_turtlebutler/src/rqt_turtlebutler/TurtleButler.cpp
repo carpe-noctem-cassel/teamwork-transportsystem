@@ -12,8 +12,28 @@
 #include <string>
 #include <ros/console.h>
 #include <tf/transform_listener.h>
+#include <SystemConfig.h>
+
 
 namespace rqt_turtlebutler {
+  void TurtleButler::readConfig() {
+        // Read rooms with its connected areas and pois from config
+        sc->setConfigPath(ros::package::getPath("rqt_turtlebutler") + "/config");
+    auto roomNames = (*sc)["TopologicalModel"]->getSections("DistributedSystems.Rooms", NULL);
+    for (auto &roomName : *roomNames)
+    {
+      ROS_INFO(roomName.c_str());
+
+      auto pois = (*sc)["TopologicalModel"]->getSections("DistributedSystems.Rooms", roomName.c_str(), "POIs");
+      for(auto &poi: *pois) 
+      {
+        auto x = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poi.c_str(), "X", NULL);
+        auto y = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poi.c_str(), "Y", NULL);
+        ROS_INFO("%s %F %F", poi.c_str(), x, y);
+      }
+    }
+  }
+
   TurtleButler::TurtleButler()
     : rqt_gui_cpp::Plugin()
     , widget_(0)
@@ -28,8 +48,10 @@ namespace rqt_turtlebutler {
 
   void TurtleButler::initPlugin(qt_gui_cpp::PluginContext& context)
   {
+    std::setlocale(LC_NUMERIC, "en_US.UTF-8");
     //ros::init(context.argv().length, context.argv(), "rqt_turtlebutler");
     ROS_INFO("started");
+    readConfig();
     QStringList argv = context.argv();
     widget_ = new QMainWindow();
     ui_.setupUi(widget_);
@@ -167,5 +189,7 @@ namespace rqt_turtlebutler {
     // Usually used to open a dialog to offer the user a set of configuration
   }
   */
+
+
 }
 PLUGINLIB_EXPORT_CLASS(rqt_turtlebutler::TurtleButler, rqt_gui_cpp::Plugin)
