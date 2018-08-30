@@ -16,21 +16,35 @@
 
 
 namespace rqt_turtlebutler {
-  void TurtleButler::readConfig() {
-        // Read rooms with its connected areas and pois from config
-        sc->setConfigPath(ros::package::getPath("rqt_turtlebutler") + "/config");
-    auto roomNames = (*sc)["TopologicalModel"]->getSections("DistributedSystems.Rooms", NULL);
-    for (auto &roomName : *roomNames)
-    {
-      ROS_INFO(roomName.c_str());
 
+  const std::string LEONARDO = "Leonardo";
+  const std::string RAPHAEL = "Raphael";
+  const std::string DONATELLO = "Donatello";
+  const std::string LEONARDO_GOAL = "/leonardo/move_base_simple/goal";
+  const std::string RAPHAEL_GOAL = "/raphael/move_base_simple/goal";
+  const std::string DONATELLO_GOAL = "/donatello/move_base_simple/goal";
+
+  void TurtleButler::readConfig() {
+    
+    // Read rooms with its connected areas and pois from config
+    sc->setConfigPath(ros::package::getPath("rqt_turtlebutler") + "/config");
+    auto allRoomNames = (*sc)["TopologicalModel"]->getSections("DistributedSystems.Rooms", NULL);
+    for (auto &roomName : *allRoomNames)
+    {
       auto pois = (*sc)["TopologicalModel"]->getSections("DistributedSystems.Rooms", roomName.c_str(), "POIs");
-      for(auto &poi: *pois) 
+      std::vector<Poi> myPois;
+      for(auto &poiName: *pois)
       {
-        auto x = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poi.c_str(), "X", NULL);
-        auto y = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poi.c_str(), "Y", NULL);
-        ROS_INFO("%s %F %F", poi.c_str(), x, y);
+        Poi p;
+        auto x = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poiName.c_str(), "X", NULL);
+        auto y = (*sc)["TopologicalModel"]->get<double>("DistributedSystems.Rooms", roomName.c_str(), "POIs", poiName.c_str(), "Y", NULL);
+        p.id = poiName;
+        p.x = x;
+        p.y = y;
+        myPois.push_back(p);
       }
+      rooms[roomName] = myPois;
+      roomNames.push_back(roomName);
     }
   }
 
@@ -56,57 +70,57 @@ namespace rqt_turtlebutler {
     widget_ = new QMainWindow();
     ui_.setupUi(widget_);
     context.addWidget(widget_);
-    
-    initComboBoxes();
+
+    ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>(RAPHAEL_GOAL.c_str(), 1000);
+    turtleButler_publishers[RAPHAEL_GOAL.c_str()] = pub;
+    pub = n.advertise<geometry_msgs::PoseStamped>(DONATELLO_GOAL.c_str(), 1000);
+    turtleButler_publishers[DONATELLO_GOAL.c_str()] = pub;
+    pub = n.advertise<geometry_msgs::PoseStamped>(LEONARDO_GOAL.c_str(), 1000);
+    turtleButler_publishers[LEONARDO_GOAL.c_str()] = pub;
     
     connect(ui_.sendButton, SIGNAL (released()), this, SLOT (sendData()));
+    connect(ui_.pickup_comboBox, SIGNAL (currentIndexChanged(QString)), this, SLOT (updatePickupComboBox(QString)));
+    connect(ui_.dropoff_comboBox, SIGNAL (currentIndexChanged(QString)), this, SLOT (updateDropoffComboBox(QString)));
 
+    initComboBoxes();
   }
 
   void TurtleButler::initComboBoxes()
   {
     // load turtlebot names and ids from file
-    std::string botsPath = ros::package::getPath("rqt_turtlebutler") + "/config/turtlebots.txt";
-    std::ifstream botsFile (botsPath.c_str());
-    std::string value;
-    if(botsFile.is_open())
+    ui_.turtlebot_comboBox->addItem(RAPHAEL.c_str(), RAPHAEL_GOAL.c_str());
+    ui_.turtlebot_comboBox->addItem(LEONARDO.c_str(), LEONARDO_GOAL.c_str());
+    ui_.turtlebot_comboBox->addItem(DONATELLO.c_str(), DONATELLO_GOAL.c_str());
+
+    for(std::string room : roomNames)
     {
-      bool readPositions = false;
-      while(getline(botsFile, value))
-      {
-        if(value.find("#") != std::string::npos)
-        {
-          readPositions = true;
-          continue;
-        }
-        if(readPositions)
-        {
-          try {
-            std::vector<std::string> data = splitString(value, ";");
-            std::string position = data.at(1).append(" ").append(data.at(2));
-            ui_.pickup_comboBox->addItem(data.at(0).c_str(), position.c_str());
-            ui_.dropoff_comboBox->addItem(data.at(0).c_str(), position.c_str());
-          } catch(std::out_of_range e)
-          {
-            ROS_ERROR("Config file error %s", e.what());
-          }
-        }
-        else
-        {
-          try
-          {
-            std::vector<std::string> data = splitString(value, ";");
-            ui_.turtlebot_comboBox->addItem(data.at(0).c_str(), data.at(1).c_str());
-            ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>(data.at(1).c_str(), 1000);
-            turtleButler_publishers[data.at(1).c_str()] = pub;
-          } catch(std::out_of_range e)
-          {
-            ROS_ERROR("Config file error %s", e.what());
-          }
-        }
-      }
+      ui_.pickup_comboBox->addItem(room.c_str(), room.c_str());
+      ui_.dropoff_comboBox->addItem(room.c_str(), room.c_str());
     }
-    botsFile.close();
+    ui_.pickup_comboBox->setCurrentIndex(0);
+    ui_.dropoff_comboBox->setCurrentIndex(0);
+  }
+
+  void TurtleButler::updatePickupComboBox(QString roomName)
+  {
+    std::vector<Poi> currentPois = rooms[roomName.toStdString()];
+    ui_.pickup_position_comboBox->clear();
+    for(Poi poi : currentPois)
+    {
+      std::string position = "" + std::to_string(poi.x) + " " + std::to_string(poi.y);
+      ui_.pickup_position_comboBox->addItem(poi.id.c_str(), position.c_str());
+    }
+  }
+
+    void TurtleButler::updateDropoffComboBox(QString roomName)
+  {
+    std::vector<Poi> currentPois = rooms[roomName.toStdString()];
+    ui_.dropoff_position_comboBox->clear();
+    for(Poi poi : currentPois)
+    {
+      std::string position = "" + std::to_string(poi.x) + " " + std::to_string(poi.y);
+      ui_.dropoff_position_comboBox->addItem(poi.id.c_str(), position.c_str());
+    }
   }
 
   std::vector<std::string> TurtleButler::splitString(std::string input, std::string delimeter)
@@ -131,8 +145,8 @@ namespace rqt_turtlebutler {
   {
     //std_msgs::String msg;
     std::string butler_name = ui_.turtlebot_comboBox->currentData().toString().toStdString();
-    std::string pickupPoint = ui_.pickup_comboBox->currentData().toString().toStdString();
-    std::string dropoffPoint = ui_.dropoff_comboBox->currentData().toString().toStdString();
+    std::string pickupPoint = ui_.pickup_position_comboBox->currentData().toString().toStdString();
+    std::string dropoffPoint = ui_.dropoff_position_comboBox->currentData().toString().toStdString();
 
 
    	geometry_msgs::PoseStamped pose;

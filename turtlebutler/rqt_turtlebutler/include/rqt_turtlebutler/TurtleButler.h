@@ -20,6 +20,13 @@ namespace rqt_turtlebutler {
   {
     Q_OBJECT
   public:
+
+    struct Poi {
+      std::string id;
+      double x;
+      double y;
+    };
+
     TurtleButler();
     virtual void initPlugin(qt_gui_cpp::PluginContext& context);
     virtual void shutdownPlugin();
@@ -29,6 +36,8 @@ namespace rqt_turtlebutler {
   private slots:
     void sendData();
     void initComboBoxes();
+    void updatePickupComboBox(QString);
+    void updateDropoffComboBox(QString);
     
     //bool hasConfiguration() const;
     //void triggerConfiguration();
@@ -38,7 +47,8 @@ namespace rqt_turtlebutler {
     QMainWindow* widget_;
     ros::NodeHandle n;
     std::map<std::string, ros::Publisher> turtleButler_publishers;
-    std::map<std::string, std::vector<std::string>> rooms;
+    std::map<std::string, std::vector<Poi>> rooms;
+    std::vector<std::string> roomNames;
     std::vector<std::string> splitString(std::string input, std::string delimiter);
     geometry_msgs::PoseStamped getPositions(std::string input, std::string delimeter);
     supplementary::SystemConfig *sc;

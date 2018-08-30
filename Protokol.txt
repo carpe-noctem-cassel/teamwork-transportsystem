@@ -77,3 +77,9 @@ Teamarbeit Mini-Protokol
 - Verwenden der Datei: etc/TopologicalModel.config
 
 23.08. Verbessern der UI
+- Einbinden der existierenden Punkte-Datei in die UI
+- Anbringen der Transportvorrichtung an den Turtlebot
+
+30.08. Senden der Punkte
+- Anpassen der UI zum Verwenden von Unterpunkten
+- Korrektes Einbinden der Punkte in die UI
