@@ -40,20 +40,30 @@ Teamarbeit Mini-Protokol
 - Installieren von rqt auf einem Laptop
 - Arbeit am Build der Roboter-Dateien (nicht erfolgreich)
 
-11.06.
+11.06. Besprechung des Tasters, Kompilierungsversuche
+- Verwendung von rosserial_arduiono zum erstellen von ROS-Nachrichten
+- Versuch Turtlebot auf Laptop zu kompilieren (mit Hilfe von Betreuer)
 
-18.06.
+18.06. Arbeit an der Hardware
+- Testen des Tasters mit ROS
+- Versuch rosserial auf Turtlebot-Laptop zu installieren (ohne Erfolg)
 
 25.06. Leichte Verzweiflung
 - Installieren von rosserial auf dem Turtlebot-Laptop
 - Testen des Tasters auf dem Turtlebot-Laptop
 - Beheben von Fehlern in der UI
 
-19.07. Verbesserung der GUI
+02.07. Installieren von Turtlebot auf Laborrechner
+- Einbinden des Tasters in das ttb_worldmodel (Input von Betreuer)
+- Installieren von Turtlebot auf Laborrechner
+
+06.07. Zwischentreffen mit den Betreuern
+
+19.07. Verbesserung der UI
 - Testen von Buttons und ComboBoxen
 - Hinzufuegen von File-Lesen und Publisher (noch ohne msg-Format)
 
-26.07. Weitere Verbesserung der GUI
+26.07. Weitere Verbesserung der UI
 - Verbesserung der Configurations-File
 - Turtlebot laden (konnte desswegen nicht verwendet werden)
 
@@ -82,4 +92,8 @@ Teamarbeit Mini-Protokol
 
 30.08. Senden der Punkte
 - Anpassen der UI zum Verwenden von Unterpunkten
-- Korrektes Einbinden der Punkte in die UI
+- Korrektes Einbinden der Punkte in die UI (Kartendaten entsprechen nicht akkurat Roboter-Daten)
+
+07.09. Start der Dokumentation
+- Aufteilung der Dokumentationsarbeit auf die Mitglieder
+- Diskusion der Themen und Aufbau einer Dokument-Struktur
