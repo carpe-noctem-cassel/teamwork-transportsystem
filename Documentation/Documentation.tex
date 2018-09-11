@@ -65,7 +65,7 @@
 			\textbf{Autoren:} & & Dennis & \\
 			& & Robert & \\
 			& & Philipp Schenk & \\
-			& & Eric Wagner & \\
+			& & Eric Wagner & \\ \\
 			\textbf{Betreuer:} & & M. Sc. Stephan Opfer &\\
 		\end{tabular}
 	\end{flushleft}
@@ -80,18 +80,116 @@
 	\section{Technische Arbeit}
 	
 	\subsection{Arbeitsauftrag}
+		\begin{itemize}
+			\item Erstellen eines Transporters aus einem Turtlebot
+			\item Anbindung eines Drucksensors unter einen Tragekorb
+			\item Integration der Sensorwerte in das bestehende Framework
+			\item UI zum Steuern entwickeln
+			\item Testen und Evaluieren
+		\end{itemize}
 	
 	\subsection{Programmentwurf}
-	
+		\begin{itemize}
+			\item Turtlebot beschreiben
+			\begin{itemize}
+				\item Was ist der Turtlebot?
+				\item Was kann er?
+				\item Was wurde im Fachgebiet schon damit gemacht?
+			\end{itemize}
+			
+			\item Verwendete Soft- und Hardware
+			\begin{itemize}
+				\item Verwendung von Linux 16.04 als Betriebssystem
+				\item Roboterprogrammierung in C++
+				\item Verschiedene existierende Repositories und GIT
+				\item Verwenden von QT oder Chromium für das Interface
+				\item Verwenden von Arduino mit Taster als Sensor
+				\item Rosserial Arduino zur Umwandlung in Nachrichten
+				\item Haribo-Korb zum Tragen
+				\item Steuerung des Roboters über Nachrichten aus der UI
+				\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
+			\end{itemize}
+			
+			\item Vorwissen der Teammitglieder beschreiben (hier oder bei Teamrollen?)
+			\begin{itemize}
+				\item Robert: Erfahrungen in Linux
+				\item Eric: Erfahrungen in UI-Programmierung
+				\item Dennis: Erfahrungen mit Tastern und Hardware
+			\end{itemize}
+		\end{itemize}
 	\subsection{Umsetzung}
+		\begin{itemize}
+			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
+			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
+			\item Grafik vom 14.05. einbauen und beschreiben 
+			\item Entscheidung für QT und RQT für die UI (Beschreiben)
+			\item Probleme durch Betriebssystem und Branches erwähnen
+			\item Parallele Arbeit an Taster und UI
+			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
+			\item (Vielleicht UI und Taster in zwei Unterkapitel teilen)
+			\item UI
+			\begin{itemize}
+				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
+				\item Schreiben des Codes mit C++ und ROS (RQT)
+				\item Erstellen der UI zu Hause
+				\item Bugfixen auf dem Rechner als Team
+				\item Nachrichtenart vom rviz Plugin entnommen (Pose{\_}Stamped)
+				\item Erste Version zeigen (Bild) und beschreiben
+				\item Erste Version der Datenstruktur beschreiben
+				\item Fehler in der UI-Entwicklung beschreiben und Verbesserungen sagen
+				\item Error Handling bei schlechter Config Datei
+				\item Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)
+				\item Verbesserung der UI mit den neuen Punkten (Zweite Version zeigen)
+			\end{itemize}
+			
+			\item Taster
+			\begin{itemize}
+				\item Besprechung verschiedener Taster
+				\item Entscheidung für Arduino
+				\item Schreiben des Codes und Bauen des Tasters
+				\item Einbauen des Tasters in das Weltmodell
+				\item Verbesserung des Tasters mit Korb aus Haribo
+			\end{itemize}
+			
+			\item Komplikationen mit dem Turtlebot
+			\begin{itemize}
+				\item Falsche Branches (Mit Betreuer gelöst)
+				\item Akku kaputt (Tausch des Akkus durch Betreuer)
+				\item Kommunikation nicht möglich (Deaktivieren eines Netzwerks)
+			\end{itemize}
+		\end{itemize}
 	
+	\subsection{Ausblick}
+	\begin{itemize}
+		\item Auftrag ist nicht ganz fertig geworden
+		\item Schreiben eines Behaviours, das den Taster verwendet
+		\item Verwenden von anderen Nachrichtentypen zum Senden
+		\item Anpassen der Kartendaten mit Roboter-Infos
+		\item Roboter kann per Text to Speech den gesuchten Gegenstand sagen
+		\item Verwendung von RFID zur Erkennung der Gegenstände
+	\end{itemize}
 	\newpage
 	\section{Teamarbeit}
 	
 	\subsection{Teamrollen}
-	
+		Selbsteinschätzung:\\\\
+		Dennis:\\
+		Basadur: \\
+		Belbin: \\\\
+		Robert:\\
+		Basadur: \\
+		Belbin: \\\\
+		Philipp:\\
+		Basadur: \\
+		Belbin: \\\\
+		Eric:\\
+		Basadur: Conceptualizer, Optimizer\\
+		Belbin: Weichensteller, Koordinator, Erfinder, (Spezialist)\\
 	\subsection{Teamphasen}
-	
-	\subsection{Problemlösung}
-	
+	\subsubsection{Forming}
+	\subsubsection{Storming}
+	\subsubsection{Norming}
+	\subsubsection{Performing}
+	\subsection{Probleme und Lösungen}
+	\section{Fazit}
 \end{document}
