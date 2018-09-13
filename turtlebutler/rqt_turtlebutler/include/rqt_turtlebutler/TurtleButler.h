@@ -21,6 +21,7 @@ namespace rqt_turtlebutler {
     Q_OBJECT
   public:
 
+    // Point of Interest
     struct Poi {
       std::string id;
       double x;
@@ -39,8 +40,6 @@ namespace rqt_turtlebutler {
     void updatePickupComboBox(QString);
     void updateDropoffComboBox(QString);
     
-    //bool hasConfiguration() const;
-    //void triggerConfiguration();
   private:
     void readConfig();
     Ui::TurtleButlerWidget ui_;

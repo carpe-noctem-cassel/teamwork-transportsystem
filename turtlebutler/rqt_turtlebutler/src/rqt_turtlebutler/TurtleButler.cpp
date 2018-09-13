@@ -24,6 +24,7 @@ namespace rqt_turtlebutler {
   const std::string RAPHAEL_GOAL = "/raphael/move_base_simple/goal";
   const std::string DONATELLO_GOAL = "/donatello/move_base_simple/goal";
 
+  // Reads the given config file and creates rooms and points of interests for the dropdown menus
   void TurtleButler::readConfig() {
     
     // Read rooms with its connected areas and pois from config
@@ -54,12 +55,8 @@ namespace rqt_turtlebutler {
   {
     setObjectName("TurtleButler");
   }
-  
-  void checkTurtlebotMessage(const std_msgs::String::ConstPtr& msg)
-  {
-    ROS_INFO("I heard: [%s]", msg->data.c_str());
-  }
 
+  // Sets up the turtlebot publishers and initializes buttons and dropdown menus
   void TurtleButler::initPlugin(qt_gui_cpp::PluginContext& context)
   {
     std::setlocale(LC_NUMERIC, "en_US.UTF-8");
@@ -85,6 +82,7 @@ namespace rqt_turtlebutler {
     initComboBoxes();
   }
 
+  // Initializes the dropdown menus  with the robot and room names
   void TurtleButler::initComboBoxes()
   {
     // load turtlebot names and ids from file
@@ -101,6 +99,7 @@ namespace rqt_turtlebutler {
     ui_.dropoff_comboBox->setCurrentIndex(0);
   }
 
+  // updates the pickup POI dropdown depending on the chosen room
   void TurtleButler::updatePickupComboBox(QString roomName)
   {
     std::vector<Poi> currentPois = rooms[roomName.toStdString()];
@@ -112,7 +111,8 @@ namespace rqt_turtlebutler {
     }
   }
 
-    void TurtleButler::updateDropoffComboBox(QString roomName)
+  // updates the dropoff POI dropdown depending on the chosen room
+  void TurtleButler::updateDropoffComboBox(QString roomName)
   {
     std::vector<Poi> currentPois = rooms[roomName.toStdString()];
     ui_.dropoff_position_comboBox->clear();
@@ -123,6 +123,7 @@ namespace rqt_turtlebutler {
     }
   }
 
+  // splits a string with a given delimeter
   std::vector<std::string> TurtleButler::splitString(std::string input, std::string delimeter)
   {
     std::vector<std::string> result;
@@ -141,9 +142,10 @@ namespace rqt_turtlebutler {
     return result;
   }
 
+  // Is called when the send button is pressed.
+  // Sends the pickup point as a pose_stamped message
   void TurtleButler::sendData()
   {
-    //std_msgs::String msg;
     std::string butler_name = ui_.turtlebot_comboBox->currentData().toString().toStdString();
     std::string pickupPoint = ui_.pickup_position_comboBox->currentData().toString().toStdString();
     std::string dropoffPoint = ui_.dropoff_position_comboBox->currentData().toString().toStdString();
@@ -155,7 +157,6 @@ namespace rqt_turtlebutler {
    	pose.header.stamp = ros::Time::now();
     std::string::size_type offset;
     ROS_INFO("%s", pickupPoint.c_str());
-    // ROS_INFO ("y: %d", std::stod (pickupPoint.substr(offset)));
 
    	pose.pose.position.x = std::stod (pickupPoint, &offset);
    	pose.pose.position.y = std::stod (pickupPoint.substr(offset));
@@ -163,7 +164,6 @@ namespace rqt_turtlebutler {
    	tf::Quaternion quat = tf::Quaternion(0,0,1,0);
     
    	tf::quaternionTFToMsg(quat, pose.pose.orientation);
-    //msg.data = "Test";
     if (turtleButler_publishers.find(butler_name) != turtleButler_publishers.end())
     {
       turtleButler_publishers[butler_name].publish(pose);
@@ -172,17 +172,16 @@ namespace rqt_turtlebutler {
     {
       ROS_ERROR("Could not find robot!");
     }
-//    std::cout << ui_.turtlebot_comboBox->currentData().toString().toStdString();
   }
   
   void TurtleButler::shutdownPlugin()
   {
-    // TODO unregister all publishers here
+    // unregister all publishers here
   }
   
   void TurtleButler::saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::Settings& instance_settings) const
   {
-    // TODO save intrinsic configurations, usually using:
+    // save intrinsic configurations, usually using:
     // v = instance_settings.value(k);
   }
   
@@ -191,19 +190,5 @@ namespace rqt_turtlebutler {
     // TODO restore intrinsic configuration, usually using:
     // v = instance_settings.value(k);
   }
-  
-  /*
-  bool hasConfiguration() const
-  {
-    return true;
-  }
-  
-  void triggerConfiguration()
-  {
-    // Usually used to open a dialog to offer the user a set of configuration
-  }
-  */
-
-
 }
 PLUGINLIB_EXPORT_CLASS(rqt_turtlebutler::TurtleButler, rqt_gui_cpp::Plugin)
