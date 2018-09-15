@@ -82,17 +82,31 @@
 	\section{Technische Arbeit}
 	
 	\subsection{Arbeitsauftrag}
-		Robert
-		\begin{itemize}
-			\item Erstellen eines Transporters aus einem Turtlebot
-			\item Anbindung eines Drucksensors unter einen Tragekorb
-			\item Integration der Sensorwerte in das bestehende Framework
-			\item UI zum Steuern entwickeln
-			\item Testen und Evaluieren
-		\end{itemize}
+Im KickOff-Workshop zur Veranstaltung \glqq Teamarbeit\grqq\ wurden mehrere Aufgaben vorgestellt. Das Team hat sich dann zusammen gefunden, um folgende Aufgabe zu bearbeiten: \\
+Für die vom Team bearbeitete Aufgabe sollten ein Turtlebot und die existierende Software so erweitert werden, dass der Turtlebot als Transportsystem im Fachgebiet eingesetzt werden kann. Der Turtlebot sollte über die Software an einen Ort im Fachgebiet geschickt werden können, an dem er einen Gegenstand entgegen nimmt. Der Gegenstand sollte dann an einen vorher in der Software definierten Zielort gebracht werden. \\
+Für die Umsetzung sollte ein Behältnis  für den Transport der Gegenstände auf dem Turtlebot befestigt werden. Der Behälter sollte mit entsprechender Sensorik ausgestattet werden, damit der Turtlebot erkennt, wenn ein Gegenstand auf ihm plaziert wurde. Da der Turtlebot nur Daten verarbeiten kann, die sich in seinem Weltmodel befinden, mussten die Sensordaten außerdem in das bestehende Framework eingepflegt werden.\\
+Um dem Turtlebot den Transportauftrag zu erteilen, sollte eine graphische Benutzeroberfläche entwickelt werden, in der man den Start- und Zielpunkt, sowie den zu transportierenden Gegenstand festlegen können soll.  
+
+		
+%\begin{itemize}
+%\item Erstellen eines Transporters aus einem Turtlebot
+%\item Anbindung eines Drucksensors unter einen Tragekorb
+%\item Integration der Sensorwerte in das bestehende Framework
+%\item UI zum Steuern entwickeln
+%\item Testen und Evaluieren
+%\end{itemize}
 	
-	\subsection{Programmentwurf}
-		Robert\\
+\subsection{Entwurft}
+\subsubsection{Erste Bestandsaufnahme}
+Da kein Teammitglied zuvor mit den Turtlebots gearbeitet hat, musste sich das Team zunächst einen groben Überblick über die bestehende Hard- und Software verfassen, bevor mit der eigentlichen Planung begonnen werden konnte.\\
+Für die Sensorik des Behälters war der Aufbau des Turtlebots ausschlaggebend: Gesteuert wird der Turtlebot von einem Notebook. Dieser ist über USB sowohl mit der Fahrbasis, als auch mit der Sensorik für die räumliche Erkennung verbunden. Damit wurde klar, dass auch der Gegenstandsdetektor über USB mit dem Notebook verbunden werden muss. \\
+Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basiert auf dem \glqq Robot Operating System\grqq , kurz ROS genannt, in der Version \textit{Kinetic} und ist in C++ verfasst. Das User Interface musste als mit ROS kommunizieren können und im besten Fall in C++ geschrieben sein.
+
+\subsubsection{Recherche}
+
+
+
+\subsubsection{Erster Entwurf}	
 		\begin{itemize}
 			\item Turtlebot beschreiben
 			\begin{itemize}
