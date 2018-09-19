@@ -161,20 +161,46 @@ Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Daf�
 			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
 		\end{itemize}
 			\subsubsection{UI}
-				Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben. Neben 
-			\begin{itemize}
-				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
-				\item Schreiben des Codes mit C++ und ROS (RQT)
-				\item Erstellen der UI zu Hause
-				\item Bugfixen auf dem Rechner als Team
-				\item Nachrichtenart vom rviz Plugin entnommen (Pose{\_}Stamped)
-				\item Erste Version zeigen (Bild) und beschreiben
-				\item Erste Version der Datenstruktur beschreiben
-				\item Fehler in der UI-Entwicklung beschreiben und Verbesserungen sagen
-				\item Error Handling bei schlechter Config Datei
-				\item Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte) (Robert)
-				\item Verbesserung der UI mit den neuen Punkten (Zweite Version zeigen)
-			\end{itemize}
+				Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben.\\
+				Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.\\
+				\begin{figure} [H]
+					\centering
+					\includegraphics[height=6cm]{Images/Turtlebutler_Old.png}
+					\caption{Alte Version des User-Interfaces in QTCreator}
+					\label{fig:OldUI}
+				\end{figure}
+				Wie auf \cref{fig:OldUI} zu erkennen ist bestand die erste Version der UI einer Reihe an Dropdown-Menüs mit einem Knopf. In dem ersten Dropdown-Menü kann der Nutzer zwischen einem der drei Roboter des Fachgebiets, Leonardo, Donatello und Raphael, wählen. Die nächsten zwei Menüs dienen zur Auswahl des Abhol- und Zielpunktes. Zuletzt kann mit einer Texteingabe der gewünschte Gegenstand angegeben werden. Mit Hilfe des Drückens auf den Sendeknopf sollten diese Informationen nun in einer Nachricht verpackt werden, die an den gewählten Turtlebot geschickt wird.\\
+				In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, in der Informationen zu den Turtlebots und festgelegten Punkten enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst werden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer kann hier nun die Namen von Turtlebots und Standorten sehen.\\
+				Da die Nachrichten ohne ein passendes Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
+				Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets befinden.\\
+				\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)\\
+				\begin{figure} [H]
+					\centering
+					\includegraphics[height=8cm]{Images/Turtlebutler_Used.png}
+					\caption{Aktuelle Version des User-Interfaces}
+					\label{fig:NewUI}
+				\end{figure}
+				Auf Grund des Aufbaus der neuen POIs musste auch die UI verändert werden. Wie man an \cref{fig:NewUI} und \cref{fig:NewUIDropdown} sehen kann wurden die Dropdown-Menüs der Positionen in zwei Teile aufgeteilt. In dem linken Menü kann der Nutzer den Raum bestimmen und in dem Rechten die Position im Raum. Wählt der Nutzer einen Raum, so ändert sich dadurch die Liste an verfügbaren Positionen. Für das Verschicken der Nachricht ist hierbei nur die Position relevant, da diese mit den X- und Y-Koordinaten verknüpft ist. Da das Behaviour-Skript leider nicht fertig gestellt werden konnte, verschickt die neue UI weiterhin nur die Abholposition als \glqq Pose{\_}Stamped\grqq-Nachricht.
+				\begin{figure} [H]
+					\centering
+					\includegraphics[height=5cm]{Images/Turtlebutler_Rooms.png}
+					\includegraphics[height=5cm]{Images/Turtlebutler_Positions.png}
+					\caption{Dropdown-Menüs des neuen User-Interfaces}
+					\label{fig:NewUIDropdown}
+				\end{figure}
+%			\begin{itemize}
+%				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
+%				\item Schreiben des Codes mit C++ und ROS (RQT)
+%				\item Erstellen der UI zu Hause
+%				\item Bugfixen auf dem Rechner als Team
+%				\item Nachrichtenart vom rviz Plugin entnommen (Pose{\_}Stamped)
+%				\item Erste Version zeigen (Bild) und beschreiben
+%				\item Erste Version der Datenstruktur beschreiben
+%				\item Fehler in der UI-Entwicklung beschreiben und Verbesserungen sagen
+%				\item Error Handling bei schlechter Config Datei
+%				\item Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte) (Robert)
+%				\item Verbesserung der UI mit den neuen Punkten (Zweite Version zeigen)
+%			\end{itemize}
 			
 			\subsubsection{Taster}
 			Dennis\\
@@ -207,14 +233,14 @@ Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Daf�
 			\caption{Teamrollen nach Basadur}
 			\label{fig:Basadur}
 		\end{figure}
-		Auf Abbildung \ref{fig:Basadur} sind die Teamrollen nach Basadur zu sehen. Diese wurden in Generator, Conceptualizer, Optimizer und Implementer aufgeteilt. Der \textbf{Generator} ist derjenige, der Dinge ins Rollen bringt und viele Ideen zur Problemlösung sucht. Hierbei ist es schwer, ihn auf eine Idee festzunageln. Der \textbf{Conceptualizer} nimmt die Ideen vom Generator und versucht diese zusammen mit eigenen zu verwenden, um nach Lösungen zu suchen. Er versucht dabei, das Problem vollständig zu begreifen. Der \textbf{Optimizer} nutzt die abstrakten Ideen von Generator und Conceptualizer zur Umsetzung. Meist fokussiert er sich auf ein Problem und vertraut auf seine eigenen Fähigkeiten bei der Suche nach Lösungen. Der \textbf{Implementer} probiert Dinge lieber praktisch aus und verwirft Theorien, die nicht zu dieser Praxis passen. Er ist enthusiastisch und kann gut mit Menschen arbeiten. Dadurch wirkt er manchmal ungeduldig und aufdringlich.\\
+		Auf \cref{fig:Basadur} sind die Teamrollen nach Basadur zu sehen. Diese wurden in Generator, Conceptualizer, Optimizer und Implementer aufgeteilt. Der \textbf{Generator} ist derjenige, der Dinge ins Rollen bringt und viele Ideen zur Problemlösung sucht. Hierbei ist es schwer, ihn auf eine Idee festzunageln. Der \textbf{Conceptualizer} nimmt die Ideen vom Generator und versucht diese zusammen mit eigenen zu verwenden, um nach Lösungen zu suchen. Er versucht dabei, das Problem vollständig zu begreifen. Der \textbf{Optimizer} nutzt die abstrakten Ideen von Generator und Conceptualizer zur Umsetzung. Meist fokussiert er sich auf ein Problem und vertraut auf seine eigenen Fähigkeiten bei der Suche nach Lösungen. Der \textbf{Implementer} probiert Dinge lieber praktisch aus und verwirft Theorien, die nicht zu dieser Praxis passen. Er ist enthusiastisch und kann gut mit Menschen arbeiten. Dadurch wirkt er manchmal ungeduldig und aufdringlich.\\
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=6cm, width=12cm]{Images/Belbin.png}
 			\caption{Persönlichkeiten im Team nach Belbin}
 			\label{fig:Belbin}
 		\end{figure}
-		Auf Abbildung \ref{fig:Belbin} kann man die Teampersönlichkeiten nach Belbin sehen, diese sind in drei Kategorien unterteilt, sodass ein Teammitglied meist mehr als einen Typ hat. Im Folgenden werden die Rollen mit jeweils einem Satz beschrieben.\\
+		Auf \cref{fig:Belbin} kann man die Teampersönlichkeiten nach Belbin sehen, diese sind in drei Kategorien unterteilt, sodass ein Teammitglied meist mehr als einen Typ hat. Im Folgenden werden die Rollen mit jeweils einem Satz beschrieben.\\
 		Der \textbf{Weichensteller} kommuniziert innerhalb und außerhalb des Teams.\\
 		Der \textbf{Teamarbeiter} ist anpassungsfähig und arbeitet flexibel mit den anderen.\\
 		Der \textbf{Koordinator} versucht, alle zum gemeinsamen Ziel zu bewegen.\\
