@@ -6,13 +6,18 @@
 \usepackage{float}
 \usepackage{url}
 \usepackage{hyperref}
+\usepackage[ngerman,nameinlink]{cleveref}
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{transparent}
+\graphicspath{{Images/}}
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage[ngerman]{babel}
+
+
 
 \begin{document}
 	
@@ -99,50 +104,57 @@ Um dem Turtlebot den Transportauftrag zu erteilen, sollte eine graphische Benutz
 \subsection{Entwurft}
 \subsubsection{Erste Bestandsaufnahme}
 Da kein Teammitglied zuvor mit den Turtlebots gearbeitet hat, musste sich das Team zunächst einen groben Überblick über die bestehende Hard- und Software verfassen, bevor mit der eigentlichen Planung begonnen werden konnte.\\
-Für die Sensorik des Behälters war der Aufbau des Turtlebots ausschlaggebend: Gesteuert wird der Turtlebot von einem Notebook. Dieser ist über USB sowohl mit der Fahrbasis, als auch mit der Sensorik für die räumliche Erkennung verbunden. Damit wurde klar, dass auch der Gegenstandsdetektor über USB mit dem Notebook verbunden werden muss. \\
+Für die Sensorik des Behälters war der Aufbau des Turtlebots ausschlaggebend: Gesteuert wird der Turtlebot von einem Notebook. Dieses ist über USB sowohl mit der Fahrbasis, als auch mit der Sensorik für die räumliche Erkennung verbunden. Damit wurde klar, dass auch der Gegenstandsdetektor über USB mit dem Notebook verbunden werden muss. \\
 Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basiert auf dem \glqq Robot Operating System\grqq , kurz ROS genannt, in der Version \textit{Kinetic} und ist in C++ verfasst. Das User Interface musste als mit ROS kommunizieren können und im besten Fall in C++ geschrieben sein.
 
 \subsubsection{Recherche}
-
-
+Nachdem die Rahmenbedingungen abgeklärt waren, begann das Team zunächst mit der Suche nach Lösungen für die Aufgabenstellung.\\
+Bei der Sensorik für die Gegenstandserkennung hat sich das Team schnell auf einen Taster festgelegt, der ausgelöst werden soll, wenn ein Objekt in den Behälter gelegt wird. Kurzzeitig war auch noch ein RFID-Leser im Gespräch, der zusätzlich oder anstelle des Taster angebracht werden sollte. Mit dem Lesegerät hätten zwar die zu transportierenden Gegegenstände identifiziert werden können, allerdings hätten dann auch alle Objekte mit einem entsprechenden Marker versehen werden müssen. Daher entschied sich das Team für den Taster, der beim Transport den größeren Spielraum lässt und außerdem leichter umzusetzen war. \\
+Für die mögliche Umsetztung des Tasters gab es verschiedene Lösungsansätze: Die einfachste Lösung wäre ein bereits fertiger Taster mit USB-Anschluss, der zum Beispiel eine Tastaturtaste simuliert. Die Recherche des Teams zeigte, dass entsprechende \glqq Ein-Knopf-Tastaturen\grqq\ tatsächlich existieren, sich jedoch preislich in keinem realistischem Rahmen bewegen. Ein weiterer Vorschlag war die Modifikation eines Peripheriegerätes, wie Maus oder Tastatur. Auch diese Idee wurde verworfen, da sie vom Team als zu aufwändig und als mögliche Fehlerquelle angesehen wurde. \\
+Für die Entwicklung des User Interfaces wurden zwei C++-Bibliotheken evaluiert: Zum einen der Quasi-Standard \glqq Qt\grqq\ und zum anderen das \glqq Chromium Embedded Framework\grqq , kurz CEF. Bei der Evaulation stellte sich das CEF als interresante Lösung heraus, wurde aber vom Team aber abgelehnt, da es für dieses Projekt als zu aufwändig erschien. \\
+Als Plattform für die Entwicklung wollte das Team sowohl das im Fachgebiet eingesetzte Ubuntu 16.04 LTS mit ROS Kinetic, als auch das zu diesem Zeitpunkt aktuelle Ubuntu 18.04 LTS mit ROS Melodic erproben.
 
 \subsubsection{Erster Entwurf}	
+Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=4cm]{Images/digispark.png}
+\caption{Digispark Rev. 3}
+\label{fig:digispark}
+\end{figure}
+
+\subsubsection{Zweiter Entwurf}
+
 		\begin{itemize}
-			\item Turtlebot beschreiben
-			\begin{itemize}
-				\item Was ist der Turtlebot?
-				\item Was kann er?
-				\item Was wurde im Fachgebiet schon damit gemacht?
-			\end{itemize}
+			%\item Turtlebot beschreiben
+			%\begin{itemize}
+			%	\item Was ist der Turtlebot?
+			%	\item Was kann er?
+			%	\item Was wurde im Fachgebiet schon damit gemacht?
+			%\end{itemize}
 			
 			\item Verwendete Soft- und Hardware
 			\begin{itemize}
-				\item Verwendung von Linux 16.04 als Betriebssystem
+			\item Grafik vom 14.05. einbauen und beschreiben 
+			\item Entscheidung für QT und RQT für die UI (Beschreiben)
 				\item Roboterprogrammierung in C++
-				\item Verschiedene existierende Repositories und GIT
 				\item Verwenden von QT oder Chromium für das Interface
 				\item Verwenden von Arduino mit Taster als Sensor
-				\item Rosserial Arduino zur Umwandlung in Nachrichten
-				\item Haribo-Korb zum Tragen
-				\item Steuerung des Roboters über Nachrichten aus der UI
 				\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
 			\end{itemize}
 			
-			\item Vorwissen der Teammitglieder beschreiben (hier oder bei Teamrollen?)
-			\begin{itemize}
-				\item Robert: Erfahrungen in Linux
-				\item Eric: Erfahrungen in UI-Programmierung
-				\item Dennis: Erfahrungen mit Tastern und Hardware
-			\end{itemize}
 		\end{itemize}
+		
+		
 	\subsection{Umsetzung}
 		Eric (Bis UI)\\
 		\begin{itemize}
 			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
 			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
-			\item Grafik vom 14.05. einbauen und beschreiben 
-			\item Entscheidung für QT und RQT für die UI (Beschreiben)
+
 			\item Probleme durch Betriebssystem und Branches erwähnen
+			\item Verwendung von Linux 16.04 als Betriebssystem
 			\item Parallele Arbeit an Taster und UI
 			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
 			\item (Vielleicht UI und Taster in zwei Unterkapitel teilen)
@@ -165,7 +177,7 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 			\subsubsection{Taster}
 			Dennis\\
 			\begin{itemize}
-				\item Besprechung verschiedener Taster
+				\item Rosserial Arduino zur Umwandlung in Nachrichten
 				\item Entscheidung für Arduino
 				\item Schreiben des Codes und Bauen des Tasters
 				\item Einbauen des Tasters in das Weltmodell (Philipp)
@@ -224,6 +236,13 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 		\subsubsection{Eric}
 		In den Teamrollen nach Basadur schätzt sich Eric als \textbf{Conceptualizer} und \textbf{Optimizer} ein. Als Conceptualizer hat er zu Beginn des Projektes Ideen gesammelt und das Problem in Unterprobleme aufgeteilte. Er sammelte die Ideen und versuchte diese umzusetzen und zu überdenken. Beim Umsetzen der Ideen und Problemlösen hat er sich mit den anderen Teammitgliedern zusammengefunden und gemeinsam nach Lösungswegen und Lösungen zu suchen. Als Generator schätzt sich Eric weniger ein, da er sich meist auf eine Idee festlegt und selber selten zu Ideen kommt. Zusätzlich denkt er von sich nicht als Implementer, da er meist eher theoretisch über Ideen nachdenkt und Theorien aufstellt. Trotzdem kann er wie ein Implementer gut mit Menschen arbeiten.\\
 		Bei den Teamtypen nach Belbin sieht sich Eric als \textbf{Weichensteller} und \textbf{Koordinator}. Im Laufe der Teamarbeit hat er sich als Teamleiter etabliert, indem er die Arbeit bei den wöchentlichen Team-Treffen protokolliert hat. Dazu koordinierte er die Teammitglieder und versuchte bei Besprechungen jeden mit einzubeziehen. War ein Teammitglied nicht anwesend bei dem Treffen, so wurde diese Person von Eric entweder direkt danach durch die WhatsApp-Chatgruppe oder zum nachfolgenden Treffen informiert, was sie verpasst hatte. Zum Teil lässt sich Eric noch als \textbf{Spezialist} einschätzen, da er vor dem Projekt bereits mit ROS, Arduino und UIs gearbeitet hat.\\
+		
+\subsubsection{Vorwissen der Teammitglieder}
+			\begin{itemize}
+				\item Robert: Erfahrungen in Linux
+				\item Eric: Erfahrungen in UI-Programmierung
+				\item Dennis: Erfahrungen mit Tastern und Hardware
+			\end{itemize}
 	\subsection{Teamphasen}
 		Dennis\\
 		Grafik der Phasen einbauen.
