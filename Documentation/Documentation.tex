@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt,headsepline]{scrartcl}
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
+%\setcounter{secnumdepth}{-2}
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{float}
@@ -137,6 +138,7 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 		\end{itemize}
 	\subsection{Umsetzung}
 		Eric (Bis UI)\\
+		Nach dem Kickoff-Meeting wurde vom Team beschlossen, sich einmal in der Woche im Labor des Fachgebiets zu treffen. Zu Beginn haben sich die Teammitglieder getrennt mit ... 
 		\begin{itemize}
 			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
 			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
@@ -145,9 +147,9 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 			\item Probleme durch Betriebssystem und Branches erwähnen
 			\item Parallele Arbeit an Taster und UI
 			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
-			\item (Vielleicht UI und Taster in zwei Unterkapitel teilen)
 		\end{itemize}
 			\subsubsection{UI}
+				Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben. Neben 
 			\begin{itemize}
 				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
 				\item Schreiben des Codes mit C++ und ROS (RQT)
@@ -186,7 +188,7 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 	\section{Teamarbeit}
 	
 	\subsection{Teamrollen}
-		In der Einführungsveranstaltung wurden zwei Aufteilungen von Teamrollen vorgestellt: Teamrollen nach Basadur und nach Belbin.
+		In dem Kickoff-Meeting wurden zwei Aufteilungen von Teamrollen vorgestellt: Teamrollen nach Basadur und nach Belbin.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=4.5cm]{Images/Basadur.png}
@@ -209,9 +211,9 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 		Der \textbf{Beobachter} überdenkt Aufgaben kritisch und sucht nach Lösungen.\\
 		Der \textbf{Perfektionist} achtet auf Details und verfolgt Dinge bis zum Ende.\\
 		Der \textbf{Macher} arbeitet hochmotiviert und möchte etwas erreichen.\\
-		Der \textbf{Umsetzer} hat einen Sinn fürs Praktische und geht systematisch vor.\\\\
+		Der \textbf{Umsetzer} hat einen Sinn fürs Praktische und geht systematisch vor.\\
 		
-		In den folgenden Kapiteln haben sich die Teammitglieder selber und gegenseitig ein den Teamrollen nach Basadur und Belbin eingeschätzt.
+		In den folgenden Abschnitten haben sich die Teammitglieder selber und gegenseitig ein den Teamrollen nach Basadur und Belbin eingeschätzt.
 		\subsubsection{Dennis}
 		Basadur: \\
 		Belbin: 
@@ -248,4 +250,13 @@ Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basie
 	\section{Fazit}
 		(Gemeinsam, jeder ein Absatz?)
 		Wie hat die Arbeit im Team funktioniert? Anwendung der Workshop-Sachen auf reale Teamarbeit.
+		
+	\newpage
+	\section{Quellen}
+		\begin{itemize}
+			\item ROS - \href{http://www.ros.org/}{http://www.ros.org/}
+			\item Turtlebot - \href{https://www.turtlebot.com/}{https://www.turtlebot.com/}
+			\item QT und QTCreator - \href{https://www.qt.io/}{https://www.qt.io/}
+			\item RQT (ROS-QT) - \href{http://wiki.ros.org/rqt}{http://wiki.ros.org/rqt}
+		\end{itemize}
 \end{document}
