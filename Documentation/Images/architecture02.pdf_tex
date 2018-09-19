@@ -1,0 +1,79 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'architecture02.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{506.76682848bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.63786732)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{architecture02.pdf}}%
+    \put(0.33299338,0.58458838){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Turtlebutler (rQt)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{architecture02.pdf}}%
+    \put(0.57126865,0.58458838){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ROS-Core\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{architecture02.pdf}}%
+    \put(0.80066409,0.40699191){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}WLAN\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{architecture02.pdf}}%
+    \put(0.81250385,0.58458838){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ROS-UDP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{architecture02.pdf}}%
+    \put(0.57126865,0.17019662){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ROS-Core\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{architecture02.pdf}}%
+    \put(0.81250385,0.17019662){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ROS-UDP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{architecture02.pdf}}%
+    \put(0.33447335,0.17019662){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Alica\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{architecture02.pdf}}%
+    \put(0.56978868,0.03699926){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}WorldModel\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{architecture02.pdf}}%
+    \put(0.07399853,0.48099044){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Client\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{architecture02.pdf}}%
+    \put(0.0754785,0.30339397){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Turtlebot\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{architecture02.pdf}}%
+    \put(0.56978868,0.30339397){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Sensoren/Aktoren\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
