@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt,headsepline]{scrartcl}
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
+%\setcounter{secnumdepth}{-2}
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{float}
@@ -16,7 +17,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage[ngerman]{babel}
-\usepackage{calc}
 
 
 
@@ -116,7 +116,7 @@ Für die Entwicklung des User Interfaces wurden zwei C++-Bibliotheken evaluiert:
 Als Plattform für die Entwicklung wollte das Team sowohl das im Fachgebiet eingesetzte Ubuntu 16.04 LTS mit ROS Kinetic, als auch das zu diesem Zeitpunkt aktuelle Ubuntu 18.04 LTS mit ROS Melodic erproben.
 
 \subsubsection{Erster Entwurf}	
-Nach der Recherche entschied sich das Team dazu, den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
+Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
 
 \begin{figure}[H]
 \centering
@@ -125,48 +125,32 @@ Nach der Recherche entschied sich das Team dazu, den Taster selbst zu bauen. Daf
 \label{fig:digispark}
 \end{figure}
 
-Für die Software untersuchte das Team den existierenden Code in den verschiedenen Git-Repositories und entwickelte aus den Ergebnissen einen ersten Ansatz für die Software-Architektur (\cref{fig:arch01}) des Projekts. Für den Client sollte es dabei ein Frontend auf Basis von Qt geben, das die Benutzerobefläche zur Verfügung stellt. Das Frontend schickt die Benutzereingaben an das Backend, welches die Daten verarbeitet und an ROS (bzw. die ROS-Kernanwendung) weiter reicht. Der existierende ROS-UDP-Proxy soll die Daten als ROS-Message über das WLAN an den Turtlebot schicken. Auf dem Turtlebot soll es eine ROS-Komponente geben, die die Daten zu Kommandos für den Turtlebot umwandelt. 
-
-\begin{figure}[H]
-\centering
-\resizebox{\textwidth}{!}{\input{Images/architecture01.pdf_tex}}
-\caption{Erster Architektur-Entwurf}
-\label{fig:arch01}
-\end{figure}
-
 \subsubsection{Zweiter Entwurf}
 
-Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodel und eine Komponente namens \glqq Alica\grqq . Im Weltmodel wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodel holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodel und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodel eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
-Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spezielle Version von Qt gibt, die direkt mit ROS kommunzieren kann, sodass die Aufteilung in Frontend und Backend nicht nötig ist.
-
-\begin{figure}[H]
-\centering
-\resizebox{\textwidth}{!}{\input{Images/architecture02.pdf_tex}}
-\caption{Zweiter Architektur-Entwurf}
-\label{fig:arch02}
-\end{figure}
-
-%\begin{itemize}
-%\item Turtlebot beschreiben
-%\begin{itemize}
-%\item Was ist der Turtlebot?
-%\item Was kann er?
-%\item Was wurde im Fachgebiet schon damit gemacht?
-%\end{itemize}
-%\item Verwendete Soft- und Hardware
-%\begin{itemize}
-%\item Grafik vom 14.05. einbauen und beschreiben 
-%\item Entscheidung für QT und RQT für die UI (Beschreiben)
-%\item Roboterprogrammierung in C++
-%\item Verwenden von QT oder Chromium für das Interface
-%\item Verwenden von Arduino mit Taster als Sensor
-%\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
-%\end{itemize}
-%\end{itemize}
+		\begin{itemize}
+			%\item Turtlebot beschreiben
+			%\begin{itemize}
+			%	\item Was ist der Turtlebot?
+			%	\item Was kann er?
+			%	\item Was wurde im Fachgebiet schon damit gemacht?
+			%\end{itemize}
+			
+			\item Verwendete Soft- und Hardware
+			\begin{itemize}
+			\item Grafik vom 14.05. einbauen und beschreiben 
+			\item Entscheidung für QT und RQT für die UI (Beschreiben)
+				\item Roboterprogrammierung in C++
+				\item Verwenden von QT oder Chromium für das Interface
+				\item Verwenden von Arduino mit Taster als Sensor
+				\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
+			\end{itemize}
+			
+		\end{itemize}
 		
 		
 	\subsection{Umsetzung}
 		Eric (Bis UI)\\
+		Nach dem Kickoff-Meeting wurde vom Team beschlossen, sich einmal in der Woche im Labor des Fachgebiets zu treffen. Zu Beginn haben sich die Teammitglieder getrennt mit ... 
 		\begin{itemize}
 			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
 			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
@@ -175,9 +159,9 @@ Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spez
 			\item Verwendung von Linux 16.04 als Betriebssystem
 			\item Parallele Arbeit an Taster und UI
 			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
-			\item (Vielleicht UI und Taster in zwei Unterkapitel teilen)
 		\end{itemize}
 			\subsubsection{UI}
+				Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben. Neben 
 			\begin{itemize}
 				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
 				\item Schreiben des Codes mit C++ und ROS (RQT)
@@ -216,7 +200,7 @@ Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spez
 	\section{Teamarbeit}
 	
 	\subsection{Teamrollen}
-		In der Einführungsveranstaltung wurden zwei Aufteilungen von Teamrollen vorgestellt: Teamrollen nach Basadur und nach Belbin.
+		In dem Kickoff-Meeting wurden zwei Aufteilungen von Teamrollen vorgestellt: Teamrollen nach Basadur und nach Belbin.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=4.5cm]{Images/Basadur.png}
@@ -239,9 +223,9 @@ Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spez
 		Der \textbf{Beobachter} überdenkt Aufgaben kritisch und sucht nach Lösungen.\\
 		Der \textbf{Perfektionist} achtet auf Details und verfolgt Dinge bis zum Ende.\\
 		Der \textbf{Macher} arbeitet hochmotiviert und möchte etwas erreichen.\\
-		Der \textbf{Umsetzer} hat einen Sinn fürs Praktische und geht systematisch vor.\\\\
+		Der \textbf{Umsetzer} hat einen Sinn fürs Praktische und geht systematisch vor.\\
 		
-		In den folgenden Kapiteln haben sich die Teammitglieder selber und gegenseitig ein den Teamrollen nach Basadur und Belbin eingeschätzt.
+		In den folgenden Abschnitten haben sich die Teammitglieder selber und gegenseitig ein den Teamrollen nach Basadur und Belbin eingeschätzt.
 		\subsubsection{Dennis}
 		Basadur: \\
 		Belbin: 
@@ -285,4 +269,13 @@ Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spez
 	\section{Fazit}
 		(Gemeinsam, jeder ein Absatz?)
 		Wie hat die Arbeit im Team funktioniert? Anwendung der Workshop-Sachen auf reale Teamarbeit.
+		
+	\newpage
+	\section{Quellen}
+		\begin{itemize}
+			\item ROS - \href{http://www.ros.org/}{http://www.ros.org/}
+			\item Turtlebot - \href{https://www.turtlebot.com/}{https://www.turtlebot.com/}
+			\item QT und QTCreator - \href{https://www.qt.io/}{https://www.qt.io/}
+			\item RQT (ROS-QT) - \href{http://wiki.ros.org/rqt}{http://wiki.ros.org/rqt}
+		\end{itemize}
 \end{document}
