@@ -88,64 +88,78 @@
 	\section{Technische Arbeit}
 	
 	\subsection{Arbeitsauftrag}
-Im KickOff-Workshop zur Veranstaltung \glqq Teamarbeit\grqq\ wurden mehrere Aufgaben vorgestellt. Das Team hat sich dann zusammen gefunden, um folgende Aufgabe zu bearbeiten: \\
-Für die vom Team bearbeitete Aufgabe sollten ein Turtlebot und die existierende Software so erweitert werden, dass der Turtlebot als Transportsystem im Fachgebiet eingesetzt werden kann. Der Turtlebot sollte über die Software an einen Ort im Fachgebiet geschickt werden können, an dem er einen Gegenstand entgegen nimmt. Der Gegenstand sollte dann an einen vorher in der Software definierten Zielort gebracht werden. \\
-Für die Umsetzung sollte ein Behältnis  für den Transport der Gegenstände auf dem Turtlebot befestigt werden. Der Behälter sollte mit entsprechender Sensorik ausgestattet werden, damit der Turtlebot erkennt, wenn ein Gegenstand auf ihm plaziert wurde. Da der Turtlebot nur Daten verarbeiten kann, die sich in seinem Weltmodel befinden, mussten die Sensordaten außerdem in das bestehende Framework eingepflegt werden.\\
-Um dem Turtlebot den Transportauftrag zu erteilen, sollte eine graphische Benutzeroberfläche entwickelt werden, in der man den Start- und Zielpunkt, sowie den zu transportierenden Gegenstand festlegen können soll.  
+		Im KickOff-Workshop zur Veranstaltung \glqq Teamarbeit\grqq\ wurden mehrere Aufgaben vorgestellt. Das Team hat sich dann zusammen gefunden, um folgende Aufgabe zu bearbeiten: \\
+		Für die vom Team bearbeitete Aufgabe sollten ein Turtlebot und die existierende Software so erweitert werden, dass der Turtlebot als Transportsystem im Fachgebiet eingesetzt werden kann. Der Turtlebot sollte über die Software an einen Ort im Fachgebiet geschickt werden können, an dem er einen Gegenstand entgegen nimmt. Der Gegenstand sollte dann an einen vorher in der Software definierten Zielort gebracht werden. \\
+		Für die Umsetzung sollte ein Behältnis  für den Transport der Gegenstände auf dem Turtlebot befestigt werden. Der Behälter sollte mit entsprechender Sensorik ausgestattet werden, damit der Turtlebot erkennt, wenn ein Gegenstand auf ihm plaziert wurde. Da der Turtlebot nur Daten verarbeiten kann, die sich in seinem Weltmodel befinden, mussten die Sensordaten außerdem in das bestehende Framework eingepflegt werden.\\
+		Um dem Turtlebot den Transportauftrag zu erteilen, sollte eine graphische Benutzeroberfläche entwickelt werden, in der man den Start- und Zielpunkt, sowie den zu transportierenden Gegenstand festlegen können soll.  
 
 		
-%\begin{itemize}
-%\item Erstellen eines Transporters aus einem Turtlebot
-%\item Anbindung eines Drucksensors unter einen Tragekorb
-%\item Integration der Sensorwerte in das bestehende Framework
-%\item UI zum Steuern entwickeln
-%\item Testen und Evaluieren
-%\end{itemize}
+%		\begin{itemize}
+%			\item Erstellen eines Transporters aus einem Turtlebot
+%			\item Anbindung eines Drucksensors unter einen Tragekorb
+%			\item Integration der Sensorwerte in das bestehende Framework
+%			\item UI zum Steuern entwickeln
+%			\item Testen und Evaluieren
+%		\end{itemize}
 	
-\subsection{Entwurft}
-\subsubsection{Erste Bestandsaufnahme}
-Da kein Teammitglied zuvor mit den Turtlebots gearbeitet hat, musste sich das Team zunächst einen groben Überblick über die bestehende Hard- und Software verfassen, bevor mit der eigentlichen Planung begonnen werden konnte.\\
-Für die Sensorik des Behälters war der Aufbau des Turtlebots ausschlaggebend: Gesteuert wird der Turtlebot von einem Notebook. Dieses ist über USB sowohl mit der Fahrbasis, als auch mit der Sensorik für die räumliche Erkennung verbunden. Damit wurde klar, dass auch der Gegenstandsdetektor über USB mit dem Notebook verbunden werden muss. \\
-Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basiert auf dem \glqq Robot Operating System\grqq , kurz ROS genannt, in der Version \textit{Kinetic} und ist in C++ verfasst. Das User Interface musste als mit ROS kommunizieren können und im besten Fall in C++ geschrieben sein.
+	\subsection{Entwurf}
+	\subsubsection{Erste Bestandsaufnahme}
+		Da kein Teammitglied zuvor mit den Turtlebots gearbeitet hat, musste sich das Team zunächst einen groben Überblick über die bestehende Hard- und Software verfassen, bevor mit der eigentlichen Planung begonnen werden konnte.\\
+		Für die Sensorik des Behälters war der Aufbau des Turtlebots ausschlaggebend: Gesteuert wird der Turtlebot von einem Notebook. Dieses ist über USB sowohl mit der Fahrbasis, als auch mit der Sensorik für die räumliche Erkennung verbunden. Damit wurde klar, dass auch der Gegenstandsdetektor über USB mit dem Notebook verbunden werden muss. \\
+		Die Software-Sammlung, die für den Betrieb des Turtlebots benötigt wird, basiert auf dem \glqq Robot Operating System\grqq , kurz ROS genannt, in der Version \textit{Kinetic} und ist in C++ verfasst. Das User Interface musste als mit ROS kommunizieren können und im besten Fall in C++ geschrieben sein.
 
-\subsubsection{Recherche}
-Nachdem die Rahmenbedingungen abgeklärt waren, begann das Team zunächst mit der Suche nach Lösungen für die Aufgabenstellung.\\
-Bei der Sensorik für die Gegenstandserkennung hat sich das Team schnell auf einen Taster festgelegt, der ausgelöst werden soll, wenn ein Objekt in den Behälter gelegt wird. Kurzzeitig war auch noch ein RFID-Leser im Gespräch, der zusätzlich oder anstelle des Taster angebracht werden sollte. Mit dem Lesegerät hätten zwar die zu transportierenden Gegegenstände identifiziert werden können, allerdings hätten dann auch alle Objekte mit einem entsprechenden Marker versehen werden müssen. Daher entschied sich das Team für den Taster, der beim Transport den größeren Spielraum lässt und außerdem leichter umzusetzen war. \\
-Für die mögliche Umsetztung des Tasters gab es verschiedene Lösungsansätze: Die einfachste Lösung wäre ein bereits fertiger Taster mit USB-Anschluss, der zum Beispiel eine Tastaturtaste simuliert. Die Recherche des Teams zeigte, dass entsprechende \glqq Ein-Knopf-Tastaturen\grqq\ tatsächlich existieren, sich jedoch preislich in keinem realistischem Rahmen bewegen. Ein weiterer Vorschlag war die Modifikation eines Peripheriegerätes, wie Maus oder Tastatur. Auch diese Idee wurde verworfen, da sie vom Team als zu aufwändig und als mögliche Fehlerquelle angesehen wurde. \\
-Für die Entwicklung des User Interfaces wurden zwei C++-Bibliotheken evaluiert: Zum einen der Quasi-Standard \glqq Qt\grqq\ und zum anderen das \glqq Chromium Embedded Framework\grqq , kurz CEF. Bei der Evaulation stellte sich das CEF als interresante Lösung heraus, wurde aber vom Team aber abgelehnt, da es für dieses Projekt als zu aufwändig erschien. \\
-Als Plattform für die Entwicklung wollte das Team sowohl das im Fachgebiet eingesetzte Ubuntu 16.04 LTS mit ROS Kinetic, als auch das zu diesem Zeitpunkt aktuelle Ubuntu 18.04 LTS mit ROS Melodic erproben.
+	\subsubsection{Recherche}
+		Nachdem die Rahmenbedingungen abgeklärt waren, begann das Team zunächst mit der Suche nach Lösungen für die Aufgabenstellung.\\
+		Bei der Sensorik für die Gegenstandserkennung hat sich das Team schnell auf einen Taster festgelegt, der ausgelöst werden soll, wenn ein Objekt in den Behälter gelegt wird. Kurzzeitig war auch noch ein RFID-Leser im Gespräch, der zusätzlich oder anstelle des Taster angebracht werden sollte. Mit dem Lesegerät hätten zwar die zu transportierenden Gegegenstände identifiziert werden können, allerdings hätten dann auch alle Objekte mit einem entsprechenden Marker versehen werden müssen. Daher entschied sich das Team für den Taster, der beim Transport den größeren Spielraum lässt und außerdem leichter umzusetzen war. \\
+		Für die mögliche Umsetztung des Tasters gab es verschiedene Lösungsansätze: Die einfachste Lösung wäre ein bereits fertiger Taster mit USB-Anschluss, der zum Beispiel eine Tastaturtaste simuliert. Die Recherche des Teams zeigte, dass entsprechende \glqq Ein-Knopf-Tastaturen\grqq\ tatsächlich existieren, sich jedoch preislich in keinem realistischem Rahmen bewegen. Ein weiterer Vorschlag war die Modifikation eines Peripheriegerätes, wie Maus oder Tastatur. Auch diese Idee wurde verworfen, da sie vom Team als zu aufwändig und als mögliche Fehlerquelle angesehen wurde. \\
+		Für die Entwicklung des User Interfaces wurden zwei C++-Bibliotheken evaluiert: Zum einen der Quasi-Standard \glqq Qt\grqq\ und zum anderen das \glqq Chromium Embedded Framework\grqq , kurz CEF. Bei der Evaulation stellte sich das CEF als interresante Lösung heraus, wurde aber vom Team aber abgelehnt, da es für dieses Projekt als zu aufwändig erschien. \\
+		Als Plattform für die Entwicklung wollte das Team sowohl das im Fachgebiet eingesetzte Ubuntu 16.04 LTS mit ROS Kinetic, als auch das zu diesem Zeitpunkt aktuelle Ubuntu 18.04 LTS mit ROS Melodic erproben.
 
-\subsubsection{Erster Entwurf}	
-Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
+	\subsubsection{Erster Entwurf}	
+		Nach der Recherche entschied sich das Team dazu, den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=4cm]{Images/digispark.png}
-\caption{Digispark Rev. 3}
-\label{fig:digispark}
-\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=4cm]{Images/digispark.png}
+			\caption{Digispark Rev. 3}
+			\label{fig:digispark}
+		\end{figure}
 
-\subsubsection{Zweiter Entwurf}
+		Für die Software untersuchte das Team den existierenden Code in den verschiedenen Git-Repositories und entwickelte aus den Ergebnissen einen ersten Ansatz für die Software-Architektur (\cref{fig:arch01}) des Projekts. Für den Client sollte es dabei ein Frontend auf Basis von Qt geben, das die Benutzerobefläche zur Verfügung stellt. Das Frontend schickt die Benutzereingaben an das Backend, welches die Daten verarbeitet und an ROS (bzw. die ROS-Kernanwendung) weiter reicht. Der existierende ROS-UDP-Proxy soll die Daten als ROS-Message über das WLAN an den Turtlebot schicken. Auf dem Turtlebot soll es eine ROS-Komponente geben, die die Daten zu Kommandos für den Turtlebot umwandelt. 
+		\begin{figure}[H]
+			\centering
+			\resizebox{\textwidth}{!}{\input{Images/architecture01.pdf_tex}}
+			\caption{Erster Architektur-Entwurf}
+			\label{fig:arch01}
+		\end{figure}
 
-		\begin{itemize}
-			%\item Turtlebot beschreiben
-			%\begin{itemize}
-			%	\item Was ist der Turtlebot?
-			%	\item Was kann er?
-			%	\item Was wurde im Fachgebiet schon damit gemacht?
-			%\end{itemize}
-			
-			\item Verwendete Soft- und Hardware
-			\begin{itemize}
-			\item Grafik vom 14.05. einbauen und beschreiben 
-			\item Entscheidung für QT und RQT für die UI (Beschreiben)
-				\item Roboterprogrammierung in C++
-				\item Verwenden von QT oder Chromium für das Interface
-				\item Verwenden von Arduino mit Taster als Sensor
-				\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
-			\end{itemize}
-			
-		\end{itemize}
+	\subsubsection{Zweiter Entwurf}
+
+		Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodel und eine Komponente namens \glqq Alica\grqq . Im Weltmodel wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodel holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodel und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodel eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
+		Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spezielle Version von Qt gibt, die direkt mit ROS kommunzieren kann, sodass die Aufteilung in Frontend und Backend nicht nötig ist.
+		\begin{figure}[H]
+			\centering
+			\resizebox{\textwidth}{!}{\input{Images/architecture02.pdf_tex}}
+			\caption{Zweiter Architektur-Entwurf}
+			\label{fig:arch02}
+		\end{figure}
+%	\begin{itemize}
+%		\item Turtlebot beschreiben
+%		\begin{itemize}
+%			\item Was ist der Turtlebot?
+%			\item Was kann er?
+%			\item Was wurde im Fachgebiet schon damit gemacht?
+%		\end{itemize}
+%		\item Verwendete Soft- und Hardware
+%		\begin{itemize}
+%			\item Grafik vom 14.05. einbauen und beschreiben 
+%			\item Entscheidung für QT und RQT für die UI (Beschreiben)
+%			\item Roboterprogrammierung in C++
+%			\item Verwenden von QT oder Chromium für das Interface
+%			\item Verwenden von Arduino mit Taster als Sensor
+%			\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
+%		\end{itemize}
+%	\end{itemize}
 		
 		
 	\subsection{Umsetzung}
@@ -160,68 +174,68 @@ Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Daf�
 			\item Parallele Arbeit an Taster und UI
 			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
 		\end{itemize}
-			\subsubsection{UI}
-				Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben.\\
-				Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.\\
-				\begin{figure} [H]
-					\centering
-					\includegraphics[height=6cm]{Images/Turtlebutler_Old.png}
-					\caption{Alte Version des User-Interfaces in QTCreator}
-					\label{fig:OldUI}
-				\end{figure}
-				Wie auf \cref{fig:OldUI} zu erkennen ist bestand die erste Version der UI einer Reihe an Dropdown-Menüs mit einem Knopf. In dem ersten Dropdown-Menü kann der Nutzer zwischen einem der drei Roboter des Fachgebiets, Leonardo, Donatello und Raphael, wählen. Die nächsten zwei Menüs dienen zur Auswahl des Abhol- und Zielpunktes. Zuletzt kann mit einer Texteingabe der gewünschte Gegenstand angegeben werden. Mit Hilfe des Drückens auf den Sendeknopf sollten diese Informationen nun in einer Nachricht verpackt werden, die an den gewählten Turtlebot geschickt wird.\\
-				In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, in der Informationen zu den Turtlebots und festgelegten Punkten enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst werden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer kann hier nun die Namen von Turtlebots und Standorten sehen.\\
-				Da die Nachrichten ohne ein passendes Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
-				Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets befinden.\\
-				\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)\\
-				\begin{figure} [H]
-					\centering
-					\includegraphics[height=8cm]{Images/Turtlebutler_Used.png}
-					\caption{Aktuelle Version des User-Interfaces}
-					\label{fig:NewUI}
-				\end{figure}
-				Auf Grund des Aufbaus der neuen POIs musste auch die UI verändert werden. Wie man an \cref{fig:NewUI} und \cref{fig:NewUIDropdown} sehen kann wurden die Dropdown-Menüs der Positionen in zwei Teile aufgeteilt. In dem linken Menü kann der Nutzer den Raum bestimmen und in dem Rechten die Position im Raum. Wählt der Nutzer einen Raum, so ändert sich dadurch die Liste an verfügbaren Positionen. Für das Verschicken der Nachricht ist hierbei nur die Position relevant, da diese mit den X- und Y-Koordinaten verknüpft ist. Da das Behaviour-Skript leider nicht fertig gestellt werden konnte, verschickt die neue UI weiterhin nur die Abholposition als \glqq Pose{\_}Stamped\grqq-Nachricht.
-				\begin{figure} [H]
-					\centering
-					\includegraphics[height=5cm]{Images/Turtlebutler_Rooms.png}
-					\includegraphics[height=5cm]{Images/Turtlebutler_Positions.png}
-					\caption{Dropdown-Menüs des neuen User-Interfaces}
-					\label{fig:NewUIDropdown}
-				\end{figure}
-%			\begin{itemize}
-%				\item Verwenden von QTCreator zum Erstellen des UI-Fensters
-%				\item Schreiben des Codes mit C++ und ROS (RQT)
-%				\item Erstellen der UI zu Hause
-%				\item Bugfixen auf dem Rechner als Team
-%				\item Nachrichtenart vom rviz Plugin entnommen (Pose{\_}Stamped)
-%				\item Erste Version zeigen (Bild) und beschreiben
-%				\item Erste Version der Datenstruktur beschreiben
-%				\item Fehler in der UI-Entwicklung beschreiben und Verbesserungen sagen
-%				\item Error Handling bei schlechter Config Datei
-%				\item Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte) (Robert)
-%				\item Verbesserung der UI mit den neuen Punkten (Zweite Version zeigen)
-%			\end{itemize}
+	\subsubsection{UI}
+		Das User Interface (UI) wurde mit Hilfe der Software QTCreator erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben.\\
+		Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.\\
+		\begin{figure} [H]
+			\centering
+			\includegraphics[height=6cm]{Images/Turtlebutler_Old.png}
+			\caption{Alte Version des User-Interfaces in QTCreator}
+			\label{fig:OldUI}
+		\end{figure}
+		Wie auf \cref{fig:OldUI} zu erkennen ist bestand die erste Version der UI einer Reihe an Dropdown-Menüs mit einem Knopf. In dem ersten Dropdown-Menü kann der Nutzer zwischen einem der drei Roboter des Fachgebiets, Leonardo, Donatello und Raphael, wählen. Die nächsten zwei Menüs dienen zur Auswahl des Abhol- und Zielpunktes. Zuletzt kann mit einer Texteingabe der gewünschte Gegenstand angegeben werden. Mit Hilfe des Drückens auf den Sendeknopf sollten diese Informationen nun in einer Nachricht verpackt werden, die an den gewählten Turtlebot geschickt wird.\\
+		In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, in der Informationen zu den Turtlebots und festgelegten Punkten enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst werden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer kann hier nun die Namen von Turtlebots und Standorten sehen.\\
+		Da die Nachrichten ohne ein passendes Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
+		Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets befinden.\\
+		\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)\\
+		\begin{figure} [H]
+			\centering
+			\includegraphics[height=8cm]{Images/Turtlebutler_Used.png}
+			\caption{Aktuelle Version des User-Interfaces}
+			\label{fig:NewUI}
+		\end{figure}
+		Auf Grund des Aufbaus der neuen POIs musste auch die UI verändert werden. Wie man an \cref{fig:NewUI} und \cref{fig:NewUIDropdown} sehen kann wurden die Dropdown-Menüs der Positionen in zwei Teile aufgeteilt. In dem linken Menü kann der Nutzer den Raum bestimmen und in dem Rechten die Position im Raum. Wählt der Nutzer einen Raum, so ändert sich dadurch die Liste an verfügbaren Positionen. Für das Verschicken der Nachricht ist hierbei nur die Position relevant, da diese mit den X- und Y-Koordinaten verknüpft ist. Da das Behaviour-Skript leider nicht fertig gestellt werden konnte, verschickt die neue UI weiterhin nur die Abholposition als \glqq Pose{\_}Stamped\grqq-Nachricht.\\
+		\begin{figure} [H]
+			\centering
+			\includegraphics[height=5cm]{Images/Turtlebutler_Rooms.png}
+			\includegraphics[height=5cm]{Images/Turtlebutler_Positions.png}
+			\caption{Dropdown-Menüs des neuen User-Interfaces}
+			\label{fig:NewUIDropdown}
+		\end{figure}
+%		\begin{itemize}
+%			\item Verwenden von QTCreator zum Erstellen des UI-Fensters
+%			\item Schreiben des Codes mit C++ und ROS (RQT)
+%			\item Erstellen der UI zu Hause
+%			\item Bugfixen auf dem Rechner als Team
+%			\item Nachrichtenart vom rviz Plugin entnommen (Pose{\_}Stamped)
+%			\item Erste Version zeigen (Bild) und beschreiben
+%			\item Erste Version der Datenstruktur beschreiben
+%			\item Fehler in der UI-Entwicklung beschreiben und Verbesserungen sagen
+%			\item Error Handling bei schlechter Config Datei
+%			\item Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte) (Robert)
+%			\item Verbesserung der UI mit den neuen Punkten (Zweite Version zeigen)
+%		\end{itemize}
 			
-			\subsubsection{Taster}
-			Dennis\\
-			\begin{itemize}
-				\item Rosserial Arduino zur Umwandlung in Nachrichten
-				\item Entscheidung für Arduino
-				\item Schreiben des Codes und Bauen des Tasters
-				\item Einbauen des Tasters in das Weltmodell (Philipp)
-				\item Verbesserung des Tasters mit Korb aus Haribo
-			\end{itemize}
+	\subsubsection{Taster}
+		Dennis\\
+		\begin{itemize}
+			\item Rosserial Arduino zur Umwandlung in Nachrichten
+			\item Entscheidung für Arduino
+			\item Schreiben des Codes und Bauen des Tasters
+			\item Einbauen des Tasters in das Weltmodell (Philipp)
+			\item Verbesserung des Tasters mit Korb aus Haribo
+		\end{itemize}
 	
 	\subsection{Ausblick}
-	Eric \\
-	\begin{itemize}
-		\item Auftrag ist nicht ganz fertig geworden
-		\item Schreiben eines Behaviours, das den Taster verwendet
-		\item Verwenden von anderen Nachrichtentypen zum Senden
-		\item Anpassen der Kartendaten mit Roboter-Infos
-		\item Roboter kann per Text to Speech den gesuchten Gegenstand sagen
-		\item Verwendung von RFID zur Erkennung der Gegenstände
-	\end{itemize}
+		Eric \\
+		\begin{itemize}
+			\item Auftrag ist nicht ganz fertig geworden
+			\item Schreiben eines Behaviours, das den Taster verwendet
+			\item Verwenden von anderen Nachrichtentypen zum Senden
+			\item Anpassen der Kartendaten mit Roboter-Infos
+			\item Roboter kann per Text to Speech den gesuchten Gegenstand sagen
+			\item Verwendung von RFID zur Erkennung der Gegenstände
+		\end{itemize}
 	\newpage
 	\section{Teamarbeit}
 	
