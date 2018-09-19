@@ -16,6 +16,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage[ngerman]{babel}
+\usepackage{calc}
 
 
 
@@ -115,7 +116,7 @@ Für die Entwicklung des User Interfaces wurden zwei C++-Bibliotheken evaluiert:
 Als Plattform für die Entwicklung wollte das Team sowohl das im Fachgebiet eingesetzte Ubuntu 16.04 LTS mit ROS Kinetic, als auch das zu diesem Zeitpunkt aktuelle Ubuntu 18.04 LTS mit ROS Melodic erproben.
 
 \subsubsection{Erster Entwurf}	
-Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
+Nach der Recherche entschied sich das Team dazu, den Taster selbst zu bauen. Dafür sollte er mit einem Microcontroller verbunden werden, der die Signale über USB an das Notbook überträgt. Als Microcontroller wurde der \glqq Digispark Rev. 3\grqq\ (\cref{fig:digispark}) gewählt, da er mit seinen kleinen Abmessungen und seinem geringen Preis eine gute Lösung zu sein schien. 
 
 \begin{figure}[H]
 \centering
@@ -124,27 +125,44 @@ Nach der Recherche entschied sich das Team dazu den Taster selbst zu bauen. Daf�
 \label{fig:digispark}
 \end{figure}
 
+Für die Software untersuchte das Team den existierenden Code in den verschiedenen Git-Repositories und entwickelte aus den Ergebnissen einen ersten Ansatz für die Software-Architektur (\cref{fig:arch01}) des Projekts. Für den Client sollte es dabei ein Frontend auf Basis von Qt geben, das die Benutzerobefläche zur Verfügung stellt. Das Frontend schickt die Benutzereingaben an das Backend, welches die Daten verarbeitet und an ROS (bzw. die ROS-Kernanwendung) weiter reicht. Der existierende ROS-UDP-Proxy soll die Daten als ROS-Message über das WLAN an den Turtlebot schicken. Auf dem Turtlebot soll es eine ROS-Komponente geben, die die Daten zu Kommandos für den Turtlebot umwandelt. 
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{\input{Images/architecture01.pdf_tex}}
+\caption{Erster Architektur-Entwurf}
+\label{fig:arch01}
+\end{figure}
+
 \subsubsection{Zweiter Entwurf}
 
-		\begin{itemize}
-			%\item Turtlebot beschreiben
-			%\begin{itemize}
-			%	\item Was ist der Turtlebot?
-			%	\item Was kann er?
-			%	\item Was wurde im Fachgebiet schon damit gemacht?
-			%\end{itemize}
-			
-			\item Verwendete Soft- und Hardware
-			\begin{itemize}
-			\item Grafik vom 14.05. einbauen und beschreiben 
-			\item Entscheidung für QT und RQT für die UI (Beschreiben)
-				\item Roboterprogrammierung in C++
-				\item Verwenden von QT oder Chromium für das Interface
-				\item Verwenden von Arduino mit Taster als Sensor
-				\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
-			\end{itemize}
-			
-		\end{itemize}
+Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodel und eine Komponente namens \glqq Alica\grqq . Im Weltmodel wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodel holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodel und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodel eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
+Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spezielle Version von Qt gibt, die direkt mit ROS kommunzieren kann, sodass die Aufteilung in Frontend und Backend nicht nötig ist.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{\input{Images/architecture02.pdf_tex}}
+\caption{Zweiter Architektur-Entwurf}
+\label{fig:arch02}
+\end{figure}
+
+%\begin{itemize}
+%\item Turtlebot beschreiben
+%\begin{itemize}
+%\item Was ist der Turtlebot?
+%\item Was kann er?
+%\item Was wurde im Fachgebiet schon damit gemacht?
+%\end{itemize}
+%\item Verwendete Soft- und Hardware
+%\begin{itemize}
+%\item Grafik vom 14.05. einbauen und beschreiben 
+%\item Entscheidung für QT und RQT für die UI (Beschreiben)
+%\item Roboterprogrammierung in C++
+%\item Verwenden von QT oder Chromium für das Interface
+%\item Verwenden von Arduino mit Taster als Sensor
+%\item Optionale Idee: RFID-Leser mit Tags in Tassen oder Büchern
+%\end{itemize}
+%\end{itemize}
 		
 		
 	\subsection{Umsetzung}
