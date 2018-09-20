@@ -175,9 +175,10 @@
 %			\item Parallele Arbeit an Taster und UI
 %			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
 %		\end{itemize}
+
 	\subsubsection{UI}
 		Das User Interface (UI) wurde mit Hilfe der Software QtCreator in Qt erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben.\\
-		Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.
+		Das Interface wurde zuerst von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=6cm]{Images/Turtlebutler_Old.png}
@@ -186,8 +187,8 @@
 		\end{figure}
 		Wie auf \cref{fig:OldUI} zu erkennen ist bestand die erste Version der UI einer Reihe an Dropdown-Menüs mit einem Knopf. In dem ersten Dropdown-Menü kann der Nutzer zwischen einem der drei Roboter des Fachgebiets, Leonardo, Donatello und Raphael, wählen. Die nächsten zwei Menüs dienen zur Auswahl des Abhol- und Zielpunktes. Zuletzt kann mit einer Texteingabe der gewünschte Gegenstand angegeben werden. Mit Hilfe des Drückens auf den Sendeknopf sollten diese Informationen nun in einer Nachricht verpackt werden, die an den gewählten Turtlebot geschickt wird.\\
 		In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, in der Informationen zu den Turtlebots und festgelegten Punkten enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst werden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer kann hier nun die Namen von Turtlebots und Standorten sehen.\\
-		Da die Nachrichten ohne ein passendes Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
-		Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets befinden.\\
+		Da die Nachrichten ohne ein passendes Planungs- oder Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
+		Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets auf einer optimierten Karte befinden.\\
 		\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)
 		\begin{figure} [H]
 			\centering
@@ -203,6 +204,7 @@
 			\caption{Dropdown-Menüs des neuen User-Interfaces}
 			\label{fig:NewUIDropdown}
 		\end{figure}
+	
 %		\begin{itemize}
 %			\item Verwenden von QTCreator zum Erstellen des UI-Fensters
 %			\item Schreiben des Codes mit C++ und ROS (RQT)
@@ -228,27 +230,32 @@
 		\end{itemize}
 	
 	\subsection{Ausblick}
-		Eric \\
-		\begin{itemize}
-			\item Auftrag ist nicht ganz fertig geworden
-			\item Schreiben eines Behaviours, das den Taster verwendet
-			\item Verwenden von anderen Nachrichtentypen zum Senden
-			\item Anpassen der Kartendaten mit Roboter-Infos
-			\item Roboter kann per Text to Speech den gesuchten Gegenstand sagen
-			\item Verwendung von RFID zur Erkennung der Gegenstände
-		\end{itemize}
+		Leider konnte der ursprüngliche Arbeitsauftrag aufgrund von technischen Komplikationen am Anfang und fehlender Zeit nicht beendet werden. Das User Interface zum Verschicken der Nachrichten und der Taster zum Überprüfen von Gegenständen konnten zu einem Großteil fertiggestellt werden.\\
+		Das Interface lädt im Moment Kartendaten einer idealen Karte, die nicht den Schlupf der Räder des Turtlebots mit einbeziehen. Dadurch kann es sein, dass der Roboter bei längeren Fahrten seine Position verliert oder nicht an seinem Ziel ankommt. Deswegen müssen die momentan verwendeten Points of Interest mit Hilfe von Roboter-Daten angepasst werden. Neben den idealisierten Positionen schickt die UI nur für den Abholpunkt eine \glqq Pose{\_}Stamped\grqq-Nachricht. Diese sollte durch ein anderes Nachrichtenformat ersetzt werden, das beide Zielorte und den aufzunehmenden Gegenstand zusammen mit dem Absender enthält.\\
+		Der Taster wurde bereits in das Weltmodell eingebaut und updated seinen Wert jede Sekunde. Diese Daten müssen noch in einem Behaviour verarbeitet werden. Das fehlende Planungsbehaviour soll die Nachricht in dem neuen Format verarbeiten und den Turtlebot zuerst zu dem Abholpunkt fahren lassen. Wird der Taster gedrückt, so soll sich der Roboter kurz danach zu dem Zielpunkt bewegen.\\
+		Während der Entwicklung gab es außerdem noch zusätzliche Ideen, mit denen das Transportsystem noch erweitert werden kann. Zum einen könnte man in dem Laptop ein Text-to-Speech-Programm verwenden, dass den in dem Interface angegebenen Gegenstand über die Lautsprecher ausgibt. Somit können auch unbeteiligte verstehen, was der Turtlebot abholen soll. Neben einer Sprachausgabe könnte man auch einen RFID-Leser in den Tragekorb einbauen, der beispielsweise auf RFID-Tags in Büchern oder Tassen reagiert. Dadurch kann der Turtlebot nicht nur überprüfen, dass etwas in dem Korb liegt, sondern auch was genau sich in dem Korb befindet.
+		
+%		\begin{itemize}
+%			\item Auftrag ist nicht ganz fertig geworden
+%			\item Schreiben eines Behaviours, das den Taster verwendet
+%			\item Verwenden von anderen Nachrichtentypen zum Senden
+%			\item Anpassen der Kartendaten mit Roboter-Infos
+%			\item Roboter kann per Text to Speech den gesuchten Gegenstand sagen
+%			\item Verwendung von RFID zur Erkennung der Gegenstände
+%		\end{itemize}
+
 	\newpage
 	\section{Teamarbeit}
 	
 	\subsection{Teamrollen}
-		In dem Kickoff-Meeting wurden zwei Aufteilungen von Teamrollen vorgestellt: Teamrollen nach Basadur und nach Belbin.
+		In dem Kickoff-Meeting wurden zwei Aufteilungen von Teamrollen vorgestellt: Rollen nach Basadur und nach Belbin.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=4.5cm]{Images/Basadur.png}
 			\caption{Teamrollen nach Basadur}
 			\label{fig:Basadur}
 		\end{figure}
-		Auf \cref{fig:Basadur} sind die Teamrollen nach Basadur zu sehen. Diese wurden in Generator, Conceptualizer, Optimizer und Implementer aufgeteilt. Der \textbf{Generator} ist derjenige, der Dinge ins Rollen bringt und viele Ideen zur Problemlösung sucht. Hierbei ist es schwer, ihn auf eine Idee festzunageln. Der \textbf{Conceptualizer} nimmt die Ideen vom Generator und versucht diese zusammen mit eigenen zu verwenden, um nach Lösungen zu suchen. Er versucht dabei, das Problem vollständig zu begreifen. Der \textbf{Optimizer} nutzt die abstrakten Ideen von Generator und Conceptualizer zur Umsetzung. Meist fokussiert er sich auf ein Problem und vertraut auf seine eigenen Fähigkeiten bei der Suche nach Lösungen. Der \textbf{Implementer} probiert Dinge lieber praktisch aus und verwirft Theorien, die nicht zu dieser Praxis passen. Er ist enthusiastisch und kann gut mit Menschen arbeiten. Dadurch wirkt er manchmal ungeduldig und aufdringlich.\\
+		Auf \cref{fig:Basadur} sind die Teamrollen nach Basadur zu sehen. Diese wurden in Generator, Conceptualizer, Optimizer und Implementer aufgeteilt. Der \textbf{Generator} ist derjenige, der Dinge ins Rollen bringt und viele Ideen zur Problemlösung sucht. Hierbei ist es schwer, ihn auf eine Idee festzunageln. Der \textbf{Conceptualizer} nimmt die Ideen vom Generator und versucht diese zusammen mit eigenen zu verwenden, um nach Lösungen zu suchen. Er versucht dabei, das Problem vollständig zu begreifen. Der \textbf{Optimizer} nutzt die abstrakten Ideen von Generator und Conceptualizer zur Umsetzung. Meist fokussiert er sich auf ein Problem und vertraut auf seine eigenen Fähigkeiten bei der Suche nach Lösungen. Der \textbf{Implementer} probiert Dinge lieber praktisch aus und verwirft Theorien, die nicht zu dieser Praxis passen. Er ist enthusiastisch und kann gut mit Menschen arbeiten. Dadurch wirkt er manchmal ungeduldig und aufdringlich.\
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=6cm, width=12cm]{Images/Belbin.png}
@@ -278,7 +285,7 @@
 		Belbin: 
 		\subsubsection{Eric}
 		In den Teamrollen nach Basadur schätzt sich Eric als \textbf{Conceptualizer} und \textbf{Optimizer} ein. Als Conceptualizer hat er zu Beginn des Projektes Ideen gesammelt und das Problem in Unterprobleme aufgeteilte. Er sammelte die Ideen und versuchte diese umzusetzen und zu überdenken. Beim Umsetzen der Ideen und Problemlösen hat er sich mit den anderen Teammitgliedern zusammengefunden und gemeinsam nach Lösungswegen und Lösungen zu suchen. Als Generator schätzt sich Eric weniger ein, da er sich meist auf eine Idee festlegt und selber selten zu Ideen kommt. Zusätzlich denkt er von sich nicht als Implementer, da er meist eher theoretisch über Ideen nachdenkt und Theorien aufstellt. Trotzdem kann er wie ein Implementer gut mit Menschen arbeiten.\\
-		Bei den Teamtypen nach Belbin sieht sich Eric als \textbf{Weichensteller} und \textbf{Koordinator}. Im Laufe der Teamarbeit hat er sich als Teamleiter etabliert, indem er die Arbeit bei den wöchentlichen Team-Treffen protokolliert hat. Dazu koordinierte er die Teammitglieder und versuchte bei Besprechungen jeden mit einzubeziehen. War ein Teammitglied nicht anwesend bei dem Treffen, so wurde diese Person von Eric entweder direkt danach durch die WhatsApp-Chatgruppe oder zum nachfolgenden Treffen informiert, was sie verpasst hatte. Zum Teil lässt sich Eric noch als \textbf{Spezialist} einschätzen, da er vor dem Projekt bereits mit ROS, Arduino und UIs gearbeitet hat.\\
+		Bei den Teamtypen nach Belbin sieht sich Eric als \textbf{Weichensteller} und \textbf{Koordinator}. Im Laufe der Teamarbeit hat er sich als Teamleiter etabliert, indem er die Arbeit bei den wöchentlichen Team-Treffen protokolliert hat. Dazu koordinierte er die Teammitglieder und versuchte bei Besprechungen jeden mit einzubeziehen. War ein Teammitglied nicht anwesend bei dem Treffen, so wurde diese Person von Eric entweder direkt danach durch die WhatsApp-Chatgruppe oder zum nachfolgenden Treffen informiert, was sie verpasst hatte. Eric lässt sich außerdem noch als \textbf{Spezialist} bezeichnen, da er vor dem Projekt bereits mit ROS, Arduino und UIs gearbeitet hat.\\
 		
 \subsubsection{Vorwissen der Teammitglieder}
 			\begin{itemize}
