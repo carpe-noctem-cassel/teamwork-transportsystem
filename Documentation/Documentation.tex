@@ -133,7 +133,7 @@
 			\label{fig:arch01}
 		\end{figure}
 
-	\subsubsection{Zweiter Entwurf}
+	\subsubsection{Zweiter Entwurf} \label{sec:entwurf2}
 
 		Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodel und eine Komponente namens \glqq Alica\grqq . Im Weltmodel wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodel holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodel und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodel eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
 		Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spezielle Version von Qt gibt, die direkt mit ROS kommunzieren kann, sodass die Aufteilung in Frontend und Backend nicht nötig ist.
@@ -163,20 +163,21 @@
 		
 		
 	\subsection{Umsetzung}
-		Eric (Bis UI)\\
-		Nach dem Kickoff-Meeting wurde vom Team beschlossen, sich einmal in der Woche im Labor des Fachgebiets zu treffen. Zu Beginn haben sich die Teammitglieder getrennt mit ... 
-		\begin{itemize}
-			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
-			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
-
-			\item Probleme durch Betriebssystem und Branches erwähnen
-			\item Verwendung von Linux 16.04 als Betriebssystem
-			\item Parallele Arbeit an Taster und UI
-			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
-		\end{itemize}
+		Nach dem Kickoff-Meeting wurde vom Team beschlossen, sich einmal in der Woche im Labor des Fachgebiets zu treffen. Zu Beginn haben sich die Teammitglieder getrennt mit Ubuntu und ROS beschäftigt und diese auf ihren Rechnern installiert. Als Betriebssystem wurde Ubuntu 16.04 verwendet, da die Turtlebots mit ROS Kinetic arbeiten. Da der Turtlebot-Code aus einigen GitHub-Repositories besteht, mussten diese zusätzlich heruntergeladen werden.\\
+		Zuerst wurde mit einem Laptop mit Ubuntu-Version 18.04 versucht, den Code der Repositiories zu kompilieren und auszuführen. Hierbei stieß man auf das Problem, dass einige Bibliotheken fehlten oder Code zum Teil nicht mit der neuen ROS-Version Melodic kompatibel war. Aufgrund dieses Problems wurde auf einen Rechner im Labor des Fachgebietes zur weiteren Arbeit umgeschwenkt, auf dem gemeinsam weiter programmiert wurde. Da auf dem Rechner trotz der korrekten Ubuntu-Version immer noch Dateien fehlten, wurde mit dem Betreuer geredet. Neben einer Konkretisierung des Arbeitsauftrages (siehe \cref{sec:entwurf2}) stellte sich heraus, dass die verschiedenen Repositories auch unterschiedliche Branches benötigen um richtig zu funktionieren. Dieses Problem betraf nicht den Laptop, der mit dem Turtlebot verbunden war, weswegen der Roboter bereits mit Hilfe eines rviz-Plugins fahren konnte.\\
+		Nachdem das die Repositories auf die korrekten Branches umgestellt wurden, konnte der Code kompiliert werden und das Team ließ den Turtlebot von dem Rechner mit Hilfe des rviz-Plugins fahren. Während und nach der Arbeit an dem Problem des fehlerhaften Codes wurde parallel an dem Interface auf dem Rechner und dem Taster für den Turtlebot gearbeitet.
+%		\begin{itemize}
+%			\item Am Anfang Beschäftigung mit den Themen und Einarbeitung (Installation von Ubuntu und ROS)
+%			\item Besprechung mit dem Betreuer zu Konkretisierung des Auftrags
+%
+%			\item Probleme durch Betriebssystem und Branches erwähnen
+%			\item Verwendung von Linux 16.04 als Betriebssystem
+%			\item Parallele Arbeit an Taster und UI
+%			\item Nachdem Laptop nicht funktioniert hat wurde auf den Rechner umgeschwenkt
+%		\end{itemize}
 	\subsubsection{UI}
 		Das User Interface (UI) wurde mit Hilfe der Software QtCreator in Qt erstellt. In dieser kann der Nutzer leicht Bedienelemente in ein Fenster hereinziehen und eine \glqq .ui\grqq-Datei wird erstellt. Für diese UI-Datei wurde danach in C++ eine Header- und Implementations-Datei mit den Namen \glqq rqt{\_}turtlebutler\grqq\ geschrieben.\\
-		Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.\\
+		Das Interface wurde von Eric zu Hause erstellt und danach gemeinsam in den Treffen fertig gestellt. Die erste Version der UI enthielt noch Fehler im Programmcode, weswegen sie gebugfixt werden musste. Diese wurden auch zusammen behoben und die UI konnte zuerst am 9. Juli kompiliert werden.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=6cm]{Images/Turtlebutler_Old.png}
@@ -187,14 +188,14 @@
 		In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, in der Informationen zu den Turtlebots und festgelegten Punkten enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst werden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer kann hier nun die Namen von Turtlebots und Standorten sehen.\\
 		Da die Nachrichten ohne ein passendes Behaviour-Skript auf der Roboter-Seite nicht funktionieren, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot das ROS-Topic und der Nachrichtentyp entnommen. Zuerst soll nur eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit der bereits existierenden Konfiguration die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
 		Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass jede Position von Hand durch Verschicken von Nachrichten mit dem rviz-Plugin aufgezeichnet werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, eine bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden, in der sich eine Reihe aus Points of Interest (POIs) der Räume des Fachgebiets befinden.\\
-		\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)\\
+		\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=8cm]{Images/Turtlebutler_Used.png}
 			\caption{Aktuelle Version des User-Interfaces}
 			\label{fig:NewUI}
 		\end{figure}
-		Auf Grund des Aufbaus der neuen POIs musste auch die UI verändert werden. Wie man an \cref{fig:NewUI} und \cref{fig:NewUIDropdown} sehen kann wurden die Dropdown-Menüs der Positionen in zwei Teile aufgeteilt. In dem linken Menü kann der Nutzer den Raum bestimmen und in dem Rechten die Position im Raum. Wählt der Nutzer einen Raum, so ändert sich dadurch die Liste an verfügbaren Positionen. Für das Verschicken der Nachricht ist hierbei nur die Position relevant, da diese mit den X- und Y-Koordinaten verknüpft ist. Da das Behaviour-Skript leider nicht fertig gestellt werden konnte, verschickt die neue UI weiterhin nur die Abholposition als \glqq Pose{\_}Stamped\grqq-Nachricht.\\
+		Auf Grund des Aufbaus der neuen POIs musste auch die UI verändert werden. Wie man an \cref{fig:NewUI} und \cref{fig:NewUIDropdown} sehen kann wurden die Dropdown-Menüs der Positionen in zwei Teile aufgeteilt. In dem linken Menü kann der Nutzer den Raum bestimmen und in dem Rechten die Position im Raum. Wählt der Nutzer einen Raum, so ändert sich dadurch die Liste an verfügbaren Positionen. Für das Verschicken der Nachricht ist hierbei nur die Position relevant, da diese mit den X- und Y-Koordinaten verknüpft ist. Da das Behaviour-Skript leider nicht fertig gestellt werden konnte, verschickt die neue UI weiterhin nur die Abholposition als \glqq Pose{\_}Stamped\grqq-Nachricht.
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=5cm]{Images/Turtlebutler_Rooms.png}
