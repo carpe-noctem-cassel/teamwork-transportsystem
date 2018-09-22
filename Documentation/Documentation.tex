@@ -90,7 +90,7 @@
 	\subsection{Arbeitsauftrag}
 		Im KickOff-Workshop zur Veranstaltung \glqq Teamarbeit\grqq\ wurden mehrere Aufgaben vorgestellt. Das Team hat sich dann zusammen gefunden, um folgende Aufgabe zu bearbeiten: \\
 		Für die vom Team bearbeitete Aufgabe sollten ein Turtlebot und die existierende Software so erweitert werden, dass der Turtlebot als Transportsystem im Fachgebiet eingesetzt werden kann. Der Turtlebot sollte über die Software an einen Ort im Fachgebiet geschickt werden können, an dem er einen Gegenstand entgegen nimmt. Der Gegenstand sollte dann an einen vorher in der Software definierten Zielort gebracht werden. \\
-		Für die Umsetzung sollte ein Behältnis  für den Transport der Gegenstände auf dem Turtlebot befestigt werden. Der Behälter sollte mit entsprechender Sensorik ausgestattet werden, damit der Turtlebot erkennt, wenn ein Gegenstand auf ihm plaziert wurde. Da der Turtlebot nur Daten verarbeiten kann, die sich in seinem Weltmodel befinden, mussten die Sensordaten außerdem in das bestehende Framework eingepflegt werden.\\
+		Für die Umsetzung sollte ein Behältnis  für den Transport der Gegenstände auf dem Turtlebot befestigt werden. Der Behälter sollte mit entsprechender Sensorik ausgestattet werden, damit der Turtlebot erkennt, wenn ein Gegenstand auf ihm plaziert wurde. Da der Turtlebot nur Daten verarbeiten kann, die sich in seinem Weltmodell befinden, mussten die Sensordaten außerdem in das bestehende Framework eingepflegt werden.\\
 		Um dem Turtlebot den Transportauftrag zu erteilen, sollte eine graphische Benutzeroberfläche entwickelt werden, in der man den Start- und Zielpunkt, sowie den zu transportierenden Gegenstand festlegen können soll.  
 
 		
@@ -135,7 +135,7 @@
 
 	\subsubsection{Zweiter Entwurf} \label{sec:entwurf2}
 
-		Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodel und eine Komponente namens \glqq Alica\grqq . Im Weltmodel wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodel holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodel und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodel eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
+		Nach Rücksprache mit dem Betreuer des Teams, Stephan Opfer, zeigte sich, dass die Software auf dem Turtlebot komplexer war, als zunächst angenommen: Wie in der Abbildung \ref{fig:arch02} zu erkennen ist, gibt es neben dem UDP-Proxy, Sensoren und Aktoren, auch noch ein Weltmodell und eine Komponente namens \glqq Alica\grqq . Im Weltmodell wird der von den Sensoren erfasste Zustand, sowie weitere Informationen, festgehalten. Alica kann sich den aktuellen Zustand aus dem Weltmodell holen, auf der Basis entsprechender Pläne das weitere Vorgehen ermittlen und das neue Verhalten an die Aktoren mitteilen. Für die Software auf dem Turtlebot musste das Team also keine eigene Komponente entwicklen, sondern den Taster in die Sensorik, das Weltmodell und die Pläne einpflegen, Außerdem musste eine Nachricht des Clients mit Start-, Endpunkt und Gegegenstand ebenfalls in das Weltmodell eingetragen werden, damit diese Informationen ebenfalls in die Planung mit einbezogen werden können. \\
 		Auf der Client-Seite erhielt das Team zusätzlich den Hinweis, dass es eine spezielle Version von Qt gibt, die direkt mit ROS kommunzieren kann, sodass die Aufteilung in Frontend und Backend nicht nötig ist.
 		\begin{figure}[H]
 			\centering
@@ -189,7 +189,9 @@
 		In der ersten Version wurde zunächst eine Konfigurationsdatei namens \glqq turtlebots.txt\grqq\ angelegt, die Informationen zu den Turtlebots und festgelegten Punkten auf der von einem Turtlebot aufgenommenen Karte des Fachgebiets enthält. Die Daten in der Datei wurden mit Hilfe von Semikolons und Zeilenumbrüchen getrennt. Zuerst wurden hier die Roboternamen mit ihren ROS-Topics gelesen und danach die Standortnamen mit deren X- und Y-Koordinaten.  Die gelesenen Daten wurden danach in die jeweiligen Dropdown-Menüs geschrieben. Der Nutzer konnte hier nun die Namen von Turtlebots und Standorten sehen.\\
 		Da die Nachrichten ohne ein passendes Planungs- oder Behaviour-Skript auf der Roboter-Seite nicht funktionierten, wurde zuerst eine einfachere Nachricht verschickt. Hierfür wurde aus dem existierenden rviz-Plugin für den Turtlebot die jeweiligen ROS-Topics der Roboter und der Typ der Nachricht entnommen. Zuerst sollte dementsprechend eine \glqq Pose{\_}Stamped\grqq-Nachricht basierend auf dem gewählten Abholpunkt verschickt werden. Erhält der Turtlebot mit den bereits existierenden Plänen die Nachricht, so fährt er zu der gegebenen Position auf der Karte.\\
 		Bei dem Erstellen der Konfigurationsdatei hat sich herausgestellt, dass für jede Position in der Datei von Hand eine Nachricht mit dem rviz-Plugin verschickt und deren Position notiert werden muss. Auf Grund dessen wurde nach einem Gespräch mit dem Betreuer entschieden, die bereits existierende Datei namens \glqq TopologicalModel.conf\grqq\ zu verwenden. In dieser befindet sich eine Sammlung aus Points of Interest (POIs) der Räume des Fachgebiets basierend auf einer optimierten Karte.\\
-		\textbf{ROBERT}: Umstellung auf existierende Kartendaten mit anderer Struktur (Karte entspricht nicht der Roboterkarte)
+Zum Einlesen der Datei konnte auf das existierende Paket \glqq SystemConfig\grqq\ zurückgegriffen werden. Es liest die Datei ein und stellt die Daten geordnet über entsprende Methoden zur Verfügung. Die eingelesenen Daten konnte dann in eine Map gespeichert werden, die jedem Raum eine Liste von Points of Interests zuordnet.\\
+
+
 		\begin{figure} [H]
 			\centering
 			\includegraphics[height=8cm]{Images/Turtlebutler_Used.png}
@@ -277,9 +279,9 @@
 		\subsubsection{Dennis}
 		Basadur: \\
 		Belbin: 
-		\subsubsection{Robert}
-		Basadur: \\
-		Belbin: 
+\subsubsection{Robert}
+Im KickOff-Workshop hatte sich Robert im Teamrollen-Modell von Basadur als \textbf{Conceptualizer} eingeordnet, da er für Probleme gerne erst einen Lösungsansatz entwicklet, bevor er diese angeht. Diese Einschätzung hat sich gerade zu Beginn des Projekts bestätigt, da er zum Beispiel die ersten Grafiken für eine mögliche Architektur entwickelt hat. Im Laufe des Projekts zeigte sich jedoch auch eine Tendenz zum \textbf{Implementer}, da nach Roberts Empfinden je nach Problem durch Ausprobieren und Testen schneller Erfolge erzeilt wurden. Weniger sieht sich Robert als \textbf{Optimizer}. Ideen in Lösungen umzusetzen fällt ihm ohne weiteren Input schwer. Das trifft vor allem zu, wenn die Ideen oder Konzepte nicht von ihm selbst stammen.\\
+Bei Belbin sah sich Robert vor dem Projekt hauptsächlich in der der Rolle des \textbf{Perfektionisten}, da er sich für nachhaltige Problemlösungen einsetzt und sich gerne auch mal in kleine Teilprobleme verbeißt. Auch diese Einordnung lässt sich nach dem Projekt bestätigen, da er zum Beispiel bei einigen Problemen auf sauberere Lösungen bestanden hat, die jedoch mehr Zeit in Anspruch genommen haben. Außerdem passt in diesem Projekt die Rolle des \textbf{Spzialisten} gut zu Robert, da er im Team am meisten mit Linux gearbeitet hat.  
 		\subsubsection{Philipp}
 		Basadur: \\
 		Belbin: 
