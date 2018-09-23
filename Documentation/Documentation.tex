@@ -10,7 +10,7 @@
 \usepackage[ngerman,nameinlink]{cleveref}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{listings}
+\usepackage{listing}s
 \usepackage{color}
 \usepackage{transparent}
 \graphicspath{{Images/}}
@@ -68,7 +68,7 @@
 	\end{verbatim}
 	\begin{flushleft}
 		\begin{tabular}{llll}
-			\textbf{Autoren:} & & Dennis Knitterscheidt & \\
+			\textbf{Autoren:} & & Dennis Knitterscheidt & 33360131 \\
 			& & Robert Meschkat & 28227496\\
 			& & Philipp Schenk & 33309370\\
 			& & Eric Wagner & 32233447\\ \\
@@ -223,6 +223,7 @@ Zum Einlesen der Datei konnte auf das existierende Paket \glqq SystemConfig\grqq
 			
 	\subsubsection{Taster}
 		Dennis\\
+	Die Tastereingabe wurde durch einen zweipoligen Drucktaster und einem Arduino realisiert. Der Arduino wurde gewählt, da er das analoge Signal des Tasters entprellt, digitalisiert und in eine ROS-Message umwandelt. Ein Arduino Mega 2560 und ein Drucktaster waren schon vorhanden, daher bietete sich die Realisierung damit an. Da keine weiteren Dinge erforderlich waren, war dies die kostengünstigste und schnellste Methode, die Tastereingabe zu realisieren. Durch den eingebauten Pull-up-Widerstand im Arduino konnte der Taster einfach über zwei Leitungen mit dem Arduino verbunden werden, wie in Abbildung {#MUSSNOCHGUCKENWIEDASGEHT} zu sehen ist. Beim Öffnen des Tasters bekommt der Arduino ein HIGH-Signal. Da allerdings ein schließender Taster verwendet wird, musste dieser im Arduino-Programm invertiert werden. Die Umwandlung des Taster-Signals in die benötigte ROS-Message erfolgt über eine speziell dafür entwickelten Arduino/ROS-Kommunikationsbibliothek namens "Ros.h", welche nachträglich installiert werden musste. Beim Code für den Arduino wurde sich an dem folgenden Tutorial orientiert: {#HIERDERLINK VON wiki.ros.org}. Um nicht nahezu kontinuierlich ROS-Messages zu verwenden, wurde in das Arduino-Programm ein Delay zwischen jeder abgesendeten Message von 1s eingebaut. Zum testen der Kommunikation wurde der Taster an den Arduino angeschlossen und der Taster in zufälligen Abständen betätigt. Wie erwartet war die ROS-Message im Linux-Terminal zu sehen. Softwareseitig musste der Arduino noch als ROS-Node in das Weltmodell eingebaut werden {#HIERPHILIPP??????}. Im Kick-off Termin wurde darüber gesprochen, was der Roboter als Eingabequelle für den Taster entgegennehmen soll. Es wurde sich zum Schluss auf eine Kaffeetasse geeinigt, welche den Taster aktivieren soll. Handelsübliche Drucktaster sind in günstigen Ausführungen recht klein und nicht dafür geeignet, dass direkt ein Objekt in der Größe einer Tasse auf sie gestellt werden. Um dieses Problem zu beheben, musste eine Vorrichtung gebaut werden, welche ein definiertes Druckverhalten einer großen Fläche an den Drucktaster weitergibt. Von unserem Betreuer wurde empfohlen, diese Vorrichtung aus einem Plastikkorb mit darunterliegendem Taster zu realisieren. Dies stellte sich aber als recht schwierig heraus, da die Böden solcher Plastikkörbe recht dick sind und das Gewicht einer Tasse meist nicht ausreicht, um den Taster zu aktivieren. Außerdem ist es schwierig, einen definierten Druck auf der gesamten Fläche des Korbes zu realisieren. Dennis hat zuhause versucht, diese beiden Probleme in den Griff zu bekommen und trotzdem kostengünstig zu bleiben. Als Lösung ist dabei eine große, verbastelte Haribo-Box zustande gekommen, wie im linken Bild in Abbildung {#WEIßIMMERNOCHNICHTWIEDASGEHT} zu sehen ist. Der Taster ist ein THT-Drucktaster mit zwei langen Beinen. Diese wurde durch den Boden der Haribo-Box gestochen und mit etwas Kleber fixiert. Damit die Haribo-Box auf den Boden gestellt werden kann, musste noch eine Höhendifferenz aus Pappe unter den Boden geklebt werden, damit die Beinchen des Tasters nicht das darunter liegende Objekt berühren. Zwischen den Beiden Pappen am Boden entstand dadurch ein dünner Kanal, in dem zwei Anschlussleitungen verlegt werden konnten, welche anschließend an die beiden Beinchen des Tasters gelötet wurden. Der Rand des Deckels wurde abgeschnitten und an beiden Enden überlappt an den inneren Boden der Box geklebt, um einen Abstand zu realisieren. Der Rest des Deckels, eine kreisrunde Scheibe, wurde anschließend in die Box auf den Taster gelegt. Durch den Rand am inneren Boden wird garantiert, dass die Scheibe nicht viel herumwackeln kann und bei Belastung nicht den inneren Boden berührt. Getestet und genauer spezifiziert wurde die Box dann mit einem Digital-Multimeter und einer Haushaltswaage. Die beiden Anschlussleitungen wurden an dem Messgerät angeschlossen und das Messgerät auf Durchgang gestellt. Mehrere Objekte mit unterschiedlichen Gewicht zwischen 100g und 1kg wurden gewogen und anschließend in die Box auf unterschiedliche Stellen der Scheibe gestellt. Resultat des Versuchs war, dass die Box Gegenstände an allen Stellen auf der Scheibe ab einem Gewicht von etwa 200g erkennt. Eine normale Kaffeetasse ohne Inhalt wiegt etwa 300g. Damit sind die Anforderungen an die Box erfüllt. Der Arduino und die Taster-Box wurden dann beim Teamworktermin am 09.08.2018 am Turtlebot mit Kabelbindern und Schaumstoff befestigt und anschließend nochmal kurz zur Demonstration getestet.
 		\begin{itemize}
 			\item Rosserial Arduino zur Umwandlung in Nachrichten
 			\item Entscheidung für Arduino
@@ -277,8 +278,7 @@ Zum Einlesen der Datei konnte auf das existierende Paket \glqq SystemConfig\grqq
 		
 		In den folgenden Abschnitten haben sich die Teammitglieder selber und gegenseitig in den Teamrollen nach Basadur und Belbin eingeschätzt.
 		\subsubsection{Dennis}
-		Basadur: \\
-		Belbin: 
+Im Kick-Off-Workshop hatte sich Dennis im Teamrollen-Modell von Basadur als eine Mischung aus \textbf{Conceptualizer} und \textbf{Implementer} ingeordnet, da er versucht, ein Problem zuerst oberflächlich aber vollständig zu begreifen und dann erste Lösungsansätze meist praktisch zu realisieren. Im Laufe der Zeit verschob sich seine Rolle als \textbf{Conceptualizer} eher zum \textbf{Otimizer}. Dadurch, dass das Projekt sehr programmierlastig war, hat Dennis versucht, die Ideen der anderen mit seinen Kenntnissen so gut es ging zu realisieren. Im Modell von Belbin sah sich Dennis als eine Mischung aus \textbf{Weichensteller} und \textbf{Umsetzer}, da er durch seine extrovertierte Art keine Hemmungen hat, mit Menschen innerhalb und außerhalb des Teams zu kommunizieren und weil er einen Sinn für das Praktische hat. Dies bestätigte sich im Laufe der Zeit. Außerdem übernahm er noch die Rolle als \textbf{Spezialist}, da er sich als einziger Elektrotechniker um den Hardware-Teil des Projekts kümmern konnte. Seine Rollen liegen in allen drei Orientierungsbereichen des Modells. Dadurch, dass das Projekt sehr programmierlastig war, fühlte sich Dennis zeitweise unbrauchbar für die Lösung mancher Probleme. Andererseits konnte er durch aufmerksames Zuschauen und Zwischenfragen auch das ein oder andere für die Zukunft dazulernen.
 \subsubsection{Robert}
 Im KickOff-Workshop hatte sich Robert im Teamrollen-Modell von Basadur als \textbf{Conceptualizer} eingeordnet, da er für Probleme gerne erst einen Lösungsansatz entwicklet, bevor er diese angeht. Diese Einschätzung hat sich gerade zu Beginn des Projekts bestätigt, da er zum Beispiel die ersten Grafiken für eine mögliche Architektur entwickelt hat. Im Laufe des Projekts zeigte sich jedoch auch eine Tendenz zum \textbf{Implementer}, da nach Roberts Empfinden je nach Problem durch Ausprobieren und Testen schneller Erfolge erzeilt wurden. Weniger sieht sich Robert als \textbf{Optimizer}. Ideen in Lösungen umzusetzen fällt ihm ohne weiteren Input schwer. Das trifft vor allem zu, wenn die Ideen oder Konzepte nicht von ihm selbst stammen.\\
 Bei Belbin sah sich Robert vor dem Projekt hauptsächlich in der der Rolle des \textbf{Perfektionisten}, da er sich für nachhaltige Problemlösungen einsetzt und sich gerne auch mal in kleine Teilprobleme verbeißt. Auch diese Einordnung lässt sich nach dem Projekt bestätigen, da er zum Beispiel bei einigen Problemen auf sauberere Lösungen bestanden hat, die jedoch mehr Zeit in Anspruch genommen haben. Außerdem passt in diesem Projekt die Rolle des \textbf{Spzialisten} gut zu Robert, da er im Team am meisten mit Linux gearbeitet hat.  
@@ -298,7 +298,7 @@ Bei Belbin sah sich Robert vor dem Projekt hauptsächlich in der der Rolle des \
 		\end{itemize}
 	\subsection{Teamphasen}
 		Dennis\\
-		Grafik der Phasen einbauen.
+		Grafik der Phasen einbauen. {#HIERVERWEISAUFGRAFIK}
 	\subsubsection{Forming}
 		Bis wohin wurde nix geschafft? Teamfindung.
 	\subsubsection{Storming}
