@@ -17,9 +17,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage[ngerman]{babel}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\lhead{\leftmark}
+\chead{}
+\rhead{\rightmark}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
 
 
 \begin{document}
+	\thispagestyle{empty}
 	
 	\begin{verbatim}
 	
@@ -75,7 +85,7 @@
 		\end{tabular}
 	\end{flushleft}
 	\newpage
-	
+	\thispagestyle{empty}
 	\tableofcontents
 	\newpage
 	
